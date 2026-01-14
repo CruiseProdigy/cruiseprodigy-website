@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CruiseProdigy v.5.64 | Standardized Intelligence Hub</title>
+    <title>CruiseProdigy v.5.63 | Standardized Intelligence Hub</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -46,41 +46,6 @@
         
         /* ADA Compliance: High Visibility Focus Ring */
         *:focus-visible { outline: 3px solid #FF7043; outline-offset: 2px; }
-
-        /* Vibe Explorer Modal Styles */
-        .modal-overlay {
-            background: rgba(0, 59, 92, 0.85);
-            backdrop-filter: blur(8px);
-            transition: opacity 0.3s ease;
-        }
-        .modal-content-anim {
-            animation: slideUp 0.4s ease forwards;
-        }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        /* Mobile Touch Targets */
-        @media (max-width: 768px) {
-            .modal-option-btn { min-height: 48px; }
-        }
-        
-        /* Deck Button Pulse Animation - Plays once on page load */
-        .deck-buttons-initial {
-            animation: gentlePulse 2s ease-in-out 1;
-        }
-        @keyframes gentlePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-        }
-        
-        /* Deck Button Icons */
-        .deck-icon {
-            font-size: 1.5rem;
-            display: inline-block;
-            margin-right: 0.5rem;
-            vertical-align: middle;
-        }
     </style>
 </head>
 <body class="bg-sand font-sans text-azure selection:bg-coral selection:text-white antialiased">
@@ -163,46 +128,40 @@
 
       <section id="vibe-explorer" class="py-20 px-10 bg-mist/30">
         <div class="max-w-7xl mx-auto">
-            <!-- Choose Your Path Section -->
-            <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-black text-azure font-['Montserrat'] tracking-tighter mb-3 leading-none">Choose Your Path</h2>
-                <p class="text-base md:text-lg text-slate/70 font-medium max-w-2xl mx-auto">Start by destination, ship type, or traveler style — we'll guide you to the perfect match</p>
-            </div>
-            
             <div class="flex flex-col lg:flex-row items-end justify-between mb-12 gap-8">
                 <div>
-                    <h3 class="text-3xl md:text-4xl font-black text-azure font-['Montserrat'] tracking-tighter uppercase mb-3 leading-none">Vibe Explorer</h3>
+                    <h2 class="text-5xl font-black text-azure font-['Montserrat'] tracking-tighter uppercase mb-3 leading-none">Vibe Explorer</h2>
                     <p id="deck-label" class="text-sm font-black text-lagoon uppercase tracking-[0.5em] opacity-60">Active Deck: Destinations</p>
                 </div>
-                <div id="deck-buttons-container" class="flex bg-white/50 p-2 rounded-3xl shadow-premium border border-white/40 deck-buttons-initial" role="tablist" aria-label="Content Categories">
-                    <button onclick="switchTab('destinations')" id="btn-destinations" role="tab" aria-selected="true" aria-controls="tab-destinations" class="px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all bg-azure text-white shadow-xl"><span class="deck-icon" aria-hidden="true">🌍</span>Destinations</button>
-                    <button onclick="switchTab('ships')" id="btn-ships" role="tab" aria-selected="false" aria-controls="tab-ships" class="px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all text-azure/50 hover:text-azure"><span class="deck-icon" aria-hidden="true">🚢</span>Ships</button>
-                    <button onclick="switchTab('travelers')" id="btn-travelers" role="tab" aria-selected="false" aria-controls="tab-travelers" class="px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all text-azure/50 hover:text-azure"><span class="deck-icon" aria-hidden="true">👥</span>Travelers</button>
+                <div class="flex bg-white/50 p-2 rounded-3xl shadow-premium border border-white/40" role="tablist" aria-label="Content Categories">
+                    <button onclick="switchTab('destinations')" id="btn-destinations" role="tab" aria-selected="true" aria-controls="tab-destinations" class="px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all bg-azure text-white shadow-xl">Destinations</button>
+                    <button onclick="switchTab('ships')" id="btn-ships" role="tab" aria-selected="false" aria-controls="tab-ships" class="px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all text-azure/50 hover:text-azure">Ships</button>
+                    <button onclick="switchTab('travelers')" id="btn-travelers" role="tab" aria-selected="false" aria-controls="tab-travelers" class="px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all text-azure/50 hover:text-azure">Travelers</button>
                 </div>
             </div>
             
             <div id="tab-destinations" role="tabpanel" aria-labelledby="btn-destinations" class="tab-content grid grid-cols-1 md:grid-cols-3 gap-12 active-tab-grid">
-                <a href="dest-caribbean.html" id="card-caribbean" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
+                <a href="dest-caribbean.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
                     <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&w=1200&q=95" alt="Caribbean Beach" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                     <span class="absolute bottom-10 left-10 text-white font-black text-2xl uppercase font-['Montserrat'] tracking-tighter">Caribbean</span>
                 </a>
-                <a href="dest-mediterranean.html" id="card-mediterranean" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
+                <a href="dest-mediterranean.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
                     <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=95" alt="Mediterranean Coast" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                     <span class="absolute bottom-10 left-10 text-white font-black text-2xl uppercase font-['Montserrat'] tracking-tighter">Mediterranean</span>
                 </a>
-                <a href="dest-europe.html" id="card-europe" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
+                <a href="dest-europe.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
                     <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1200&q=95" alt="European Architecture" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                     <span class="absolute bottom-10 left-10 text-white font-black text-2xl uppercase font-['Montserrat'] tracking-tighter">Europe</span>
                 </a>
-                <a href="dest-alaska.html" id="card-alaska" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
+                <a href="dest-alaska.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
                     <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=95" alt="Alaskan Landscape" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                     <span class="absolute bottom-10 left-10 text-white font-black text-2xl uppercase font-['Montserrat'] tracking-tighter">Alaska</span>
                 </a>
-                <a href="dest-asia-pacific.html" id="card-asia-pacific" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
+                <a href="dest-asia-pacific.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
                     <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=95" alt="Asia Pacific Temple" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                     <span class="absolute bottom-10 left-10 text-white font-black text-2xl uppercase font-['Montserrat'] tracking-tighter">Asia & Pacific</span>
@@ -213,27 +172,27 @@
             </div>
 
             <div id="tab-ships" role="tabpanel" aria-labelledby="btn-ships" class="tab-content hidden grid-cols-1 md:grid-cols-3 gap-12">
-                <a href="ship-family.html" id="card-ship-family" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
+                <a href="ship-family.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
                     <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=95" alt="Family playing on ship" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
                     <div class="absolute inset-0 bg-black/30"></div>
                     <span class="absolute bottom-10 left-10 text-white font-black text-2xl uppercase font-['Montserrat'] tracking-tighter">Family & Kids</span>
                 </a>
-                <a href="ship-luxury.html" id="card-ship-luxury" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
+                <a href="ship-luxury.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
                     <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?auto=format&fit=crop&w=1200&q=95" alt="Luxury yacht" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
                     <div class="absolute inset-0 bg-black/30"></div>
                     <span class="absolute bottom-10 left-10 text-white font-black text-2xl uppercase font-['Montserrat'] tracking-tighter">Luxury & Small Ships</span>
                 </a>
-                <a href="ship-mega.html" id="card-ship-mega" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
+                <a href="ship-mega.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
                     <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&w=1200&q=95" alt="Large cruise ship" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
                     <div class="absolute inset-0 bg-black/30"></div>
                     <span class="absolute bottom-10 left-10 text-white font-black text-2xl uppercase font-['Montserrat'] tracking-tighter">Mega-Ships</span>
                 </a>
-                <a href="ship-adults.html" id="card-ship-adults" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
+                <a href="ship-adults.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
                     <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1200&q=95" alt="Adults relaxing" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
                     <div class="absolute inset-0 bg-black/30"></div>
                     <span class="absolute bottom-10 left-10 text-white font-black text-2xl uppercase font-['Montserrat'] tracking-tighter">Adults-Only</span>
                 </a>
-                <a href="ship-traditional.html" id="card-ship-traditional" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
+                <a href="ship-traditional.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
                     <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1200&q=95" alt="Classic ocean liner" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
                     <div class="absolute inset-0 bg-black/30"></div>
                     <span class="absolute bottom-10 left-10 text-white font-black text-2xl uppercase font-['Montserrat'] tracking-tighter">Classic & Traditional</span>
@@ -244,27 +203,27 @@
             </div>
 
             <div id="tab-travelers" role="tabpanel" aria-labelledby="btn-travelers" class="tab-content hidden grid-cols-1 md:grid-cols-3 gap-12">
-                <a href="trav-family.html" id="card-trav-family" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
+                <a href="trav-family.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
                     <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=1200&q=95" alt="Family travel" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
                     <div class="absolute inset-0 bg-black/30"></div>
                     <span class="absolute bottom-10 left-10 text-white font-black text-2xl uppercase font-['Montserrat'] tracking-tighter">Families</span>
                 </a>
-                <a href="trav-couples.html" id="card-trav-couples" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
+                <a href="trav-couples.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
                     <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=1200&q=95" alt="Couple walking" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
                     <div class="absolute inset-0 bg-black/30"></div>
                     <span class="absolute bottom-10 left-10 text-white font-black text-2xl uppercase font-['Montserrat'] tracking-tighter">Couples</span>
                 </a>
-                <a href="trav-solo.html" id="card-trav-solo" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
+                <a href="trav-solo.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
                     <img src="https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=1200&q=95" alt="Solo hiker" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
                     <div class="absolute inset-0 bg-black/30"></div>
                     <span class="absolute bottom-10 left-10 text-white font-black text-2xl uppercase font-['Montserrat'] tracking-tighter">Solo Travelers</span>
                 </a>
-                <a href="trav-high-rollers.html" id="card-trav-highrollers" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
+                <a href="trav-high-rollers.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
                     <img src="https://images.unsplash.com/photo-1511193311914-0346f16efe90?auto=format&fit=crop&w=1200&q=95" alt="Luxury interior" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
                     <div class="absolute inset-0 bg-black/40"></div>
                     <span class="absolute bottom-10 left-10 text-white font-black text-2xl uppercase font-['Montserrat'] tracking-tighter">High Rollers</span>
                 </a>
-                <a href="trav-adventurers.html" id="card-trav-adventurers" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
+                <a href="trav-adventurers.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all focus:ring-4 focus:ring-coral">
                     <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1200&q=95" alt="Adventurer looking at map" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
                     <div class="absolute inset-0 bg-black/30"></div>
                     <span class="absolute bottom-10 left-10 text-white font-black text-2xl uppercase font-['Montserrat'] tracking-tighter">Adventurers</span>
@@ -309,7 +268,7 @@
             </a>
             <a href="pages/cruise-lines/line-norwegian.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d focus:outline-none focus:ring-4 focus:ring-coral rounded-[2.5rem]">
                 <div class="w-80 h-56 bg-white rounded-[2.5rem] shadow-premium flex flex-col items-center justify-center p-10 border border-gray-50 text-center">
-                    <svg class="w-12 h-12 mb-6 text-nclAqua" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                    <svg class="w-12 h-12 mb-6 text-nclAqua" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-3zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
                     <span class="font-black text-nclAqua text-2xl font-['Montserrat'] tracking-tighter uppercase">Norwegian</span>
                 </div>
             </a>
@@ -480,335 +439,15 @@
   <footer class="bg-azure text-white pt-16 pb-12 text-center">
     <div class="max-w-7xl mx-auto px-10 flex flex-col items-center">
         <div class="text-5xl font-['Poppins'] mb-6 tracking-tight">
-            <span class="font-normal text-lagoon">Cruise</span><span class="font-medium text-white">Prodigy</span>
-        </div>
+            <span class="font-normal text-lagoon">Cruise</span><span class="font-medium text-white">Prodigy</span> </div>
         <p class="text-sm italic font-medium text-white/70 mb-12">Affiliate Disclosure: Outbound links on this page may earn a commission at no cost to you.</p>
         <p class="text-[10px] opacity-60 uppercase tracking-[0.5em]">© 2026 CruiseProdigy Interactive Maritime Intel</p>
     </div>
   </footer>
 
-  <!-- VIBE EXPLORER MODAL -->
-  <div id="followup-modal" class="modal-overlay hidden fixed inset-0 z-[9999] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-      <div id="modal-container" class="bg-white w-full max-w-2xl rounded-[2rem] p-8 md:p-12 shadow-2xl relative modal-content-anim">
-          <h2 id="modal-title" class="text-3xl md:text-4xl font-black text-azure font-['Montserrat'] tracking-tighter mb-2 leading-none">Great choice!</h2>
-          <p id="modal-subtitle" class="text-slate/70 font-medium mb-8">Want to narrow your search? Pick what matters most.</p>
-          
-          <div id="modal-options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              <!-- Options populated by JavaScript -->
-          </div>
-
-          <button id="modal-skip-btn" onclick="goToResults('all')" class="w-full py-5 rounded-2xl border-[4px] border-azure text-azure font-black text-sm uppercase tracking-[0.2em] hover:bg-azure hover:text-white transition-all focus:ring-4 focus:ring-coral">
-              Skip - Show All <span id="skip-category-name"></span> Cruises
-          </button>
-      </div>
-  </div>
-
   <script>
     const API_KEY = '63db0fe991cd41d4ae0195810260401';
     let currentLocationName = "Miami"; 
-    
-    // =================================================================
-    // VIBE EXPLORER MODAL DATA - ALL THREE DECKS
-    // =================================================================
-    const modalData = {
-        // DESTINATIONS DECK
-        'caribbean': {
-            title: 'Caribbean',
-            options: [
-                { label: 'Family Fun', value: 'family', desc: 'Kids clubs, waterslides', icon: '👨‍👩‍👧‍👦' },
-                { label: 'Luxury & Relaxation', value: 'luxury', desc: 'Upscale, quiet, refined', icon: '✨' },
-                { label: 'Adventure', value: 'adventure', desc: 'Hiking, diving, active', icon: '🏃' },
-                { label: 'Party & Fun', value: 'party', desc: 'Nightlife, casinos, energy', icon: '🎉' },
-                { label: 'Best Value', value: 'value', desc: 'Budget-friendly options', icon: '💰' }
-            ]
-        },
-        'mediterranean': {
-            title: 'Mediterranean',
-            options: [
-                { label: 'Ancient History', value: 'history', desc: 'Ruins, museums, culture', icon: '🏛️' },
-                { label: 'Beach Towns', value: 'beach', desc: 'Islands, coastal villages', icon: '🏖️' },
-                { label: 'Wine & Food', value: 'culinary', desc: 'Local cuisine, wine tours', icon: '🍷' },
-                { label: 'Luxury Experience', value: 'luxury', desc: 'Upscale, exclusive ports', icon: '✨' },
-                { label: 'Best Value', value: 'value', desc: 'Budget-friendly options', icon: '💰' }
-            ]
-        },
-        'europe': {
-            title: 'Europe',
-            options: [
-                { label: 'Capital Cities', value: 'capitals', desc: 'Major cities, landmarks', icon: '🏰' },
-                { label: 'Small Towns', value: 'towns', desc: 'Villages, local charm', icon: '🏘️' },
-                { label: 'Culture & Museums', value: 'culture', desc: 'Art, history, galleries', icon: '🎨' },
-                { label: 'River Cruising', value: 'river', desc: 'Rhine, Danube, Seine', icon: '⛵' },
-                { label: 'Best Value', value: 'value', desc: 'Budget-friendly options', icon: '💰' }
-            ]
-        },
-        'alaska': {
-            title: 'Alaska',
-            options: [
-                { label: 'Wildlife Viewing', value: 'wildlife', desc: 'Bears, whales, eagles', icon: '🐻' },
-                { label: 'Glacier Experience', value: 'glaciers', desc: 'Calving, ice fields', icon: '🏔️' },
-                { label: 'Adventure', value: 'adventure', desc: 'Hiking, kayaking, active', icon: '🚣' },
-                { label: 'Luxury Cruising', value: 'luxury', desc: 'Small ships, upscale', icon: '✨' },
-                { label: 'Best Value', value: 'value', desc: 'Budget-friendly options', icon: '💰' }
-            ]
-        },
-        'asia-pacific': {
-            title: 'Asia Pacific',
-            options: [
-                { label: 'Cultural Immersion', value: 'culture', desc: 'Temples, traditions', icon: '⛩️' },
-                { label: 'Beach & Islands', value: 'beach', desc: 'Tropical paradise', icon: '🏝️' },
-                { label: 'Adventure', value: 'adventure', desc: 'Active excursions', icon: '🥾' },
-                { label: 'Luxury Experience', value: 'luxury', desc: 'High-end resorts', icon: '✨' },
-                { label: 'Best Value', value: 'value', desc: 'Budget-friendly options', icon: '💰' }
-            ]
-        },
-        
-        // SHIPS DECK
-        'ship-family': {
-            title: 'Family & Kids Ships',
-            options: [
-                { label: 'Toddlers (0-5)', value: 'toddlers', desc: 'Nurseries, splash pads', icon: '👶' },
-                { label: 'Kids (6-12)', value: 'kids', desc: 'Clubs, activities', icon: '👧' },
-                { label: 'Teens (13-17)', value: 'teens', desc: 'Teen lounges, programs', icon: '🧒' },
-                { label: 'Multi-Generational', value: 'multigen', desc: 'All ages together', icon: '👨‍👩‍👧‍👦' },
-                { label: 'Budget-Friendly', value: 'value', desc: 'Affordable family fun', icon: '💰' }
-            ]
-        },
-        'ship-luxury': {
-            title: 'Luxury Ships',
-            options: [
-                { label: 'All-Inclusive', value: 'inclusive', desc: 'Everything included', icon: '🍾' },
-                { label: 'Small Ship', value: 'small', desc: 'Intimate, boutique', icon: '⛵' },
-                { label: 'Ultra-Luxury', value: 'ultra', desc: 'Highest level service', icon: '💎' },
-                { label: 'Boutique Experience', value: 'boutique', desc: 'Unique, personalized', icon: '✨' },
-                { label: 'Best Value', value: 'value', desc: 'Luxury on a budget', icon: '💰' }
-            ]
-        },
-        'ship-mega': {
-            title: 'Mega-Ships',
-            options: [
-                { label: 'Entertainment', value: 'entertainment', desc: 'Shows, Broadway', icon: '🎭' },
-                { label: 'Activities', value: 'activities', desc: 'Sports, pools, slides', icon: '🏊' },
-                { label: 'Dining Variety', value: 'dining', desc: '20+ restaurants', icon: '🍽️' },
-                { label: 'Nightlife', value: 'nightlife', desc: 'Bars, clubs, casinos', icon: '🎰' },
-                { label: 'Best Value', value: 'value', desc: 'Most for your money', icon: '💰' }
-            ]
-        },
-        'ship-adults': {
-            title: 'Adults-Only Ships',
-            options: [
-                { label: 'Romantic Escape', value: 'romantic', desc: 'Couples-focused', icon: '💑' },
-                { label: 'Social Atmosphere', value: 'social', desc: 'Meet new people', icon: '🍹' },
-                { label: 'Wellness Focus', value: 'wellness', desc: 'Spa, fitness, yoga', icon: '🧘' },
-                { label: 'Quiet Relaxation', value: 'quiet', desc: 'Peaceful, serene', icon: '😌' },
-                { label: 'Best Value', value: 'value', desc: 'Affordable adults-only', icon: '💰' }
-            ]
-        },
-        'ship-traditional': {
-            title: 'Classic & Traditional Ships',
-            options: [
-                { label: 'Classic Elegance', value: 'elegance', desc: 'Refined, timeless', icon: '🎩' },
-                { label: 'Formal Dining', value: 'formal', desc: 'Dress code, tradition', icon: '🍽️' },
-                { label: 'Enrichment Programs', value: 'enrichment', desc: 'Lectures, classes', icon: '📚' },
-                { label: 'Small Ship Size', value: 'small', desc: 'Intimate atmosphere', icon: '⛵' },
-                { label: 'Best Value', value: 'value', desc: 'Traditional on a budget', icon: '💰' }
-            ]
-        },
-        
-        // TRAVELERS DECK
-        'trav-family': {
-            title: 'Family Travelers',
-            options: [
-                { label: 'Young Kids (0-8)', value: 'youngkids', desc: 'Nurseries, toddler clubs', icon: '👶' },
-                { label: 'Tweens & Teens', value: 'tweensteens', desc: 'Age-specific programs', icon: '🧒' },
-                { label: 'Multi-Generational', value: 'multigen', desc: 'Grandparents included', icon: '👨‍👩‍👧‍👦' },
-                { label: 'Single Parent', value: 'singleparent', desc: 'Solo parent resources', icon: '👩‍👧' },
-                { label: 'Budget-Friendly', value: 'value', desc: 'Affordable for families', icon: '💰' }
-            ]
-        },
-        'trav-couples': {
-            title: 'Couples',
-            options: [
-                { label: 'Romantic Anniversary', value: 'anniversary', desc: 'Celebration-focused', icon: '💑' },
-                { label: 'Adventure Together', value: 'adventure', desc: 'Active excursions', icon: '🏃‍♂️' },
-                { label: 'Luxury Escape', value: 'luxury', desc: 'Upscale, pampering', icon: '✨' },
-                { label: 'Active & Social', value: 'social', desc: 'Meet other couples', icon: '👥' },
-                { label: 'Budget-Friendly', value: 'value', desc: 'Romance on a budget', icon: '💰' }
-            ]
-        },
-        'trav-solo': {
-            title: 'Solo Travelers',
-            options: [
-                { label: 'Meet People', value: 'social', desc: 'Mixers, activities', icon: '🤝' },
-                { label: 'Relaxation & Spa', value: 'relaxation', desc: 'Me-time, wellness', icon: '🧘' },
-                { label: 'Adventure', value: 'adventure', desc: 'Active excursions', icon: '🏃' },
-                { label: 'Cultural Enrichment', value: 'culture', desc: 'Learning, lectures', icon: '📚' },
-                { label: 'Best Value', value: 'value', desc: 'Solo-friendly pricing', icon: '💰' }
-            ]
-        },
-        'trav-highrollers': {
-            title: 'High Rollers',
-            options: [
-                { label: 'Suite Experience', value: 'suite', desc: 'Penthouses, butler', icon: '🏨' },
-                { label: 'Fine Dining', value: 'dining', desc: 'Specialty restaurants', icon: '🍷' },
-                { label: 'Exclusive Access', value: 'exclusive', desc: 'Private lounges, areas', icon: '🔑' },
-                { label: 'Personalized Service', value: 'service', desc: 'Concierge, butler', icon: '🎩' },
-                { label: 'Ultra-Luxury Only', value: 'ultra', desc: 'Top-tier only', icon: '💎' }
-            ]
-        },
-        'trav-adventurers': {
-            title: 'Adventurers',
-            options: [
-                { label: 'Active Excursions', value: 'active', desc: 'Hiking, biking, zip-lining', icon: '🚵' },
-                { label: 'Expedition Cruising', value: 'expedition', desc: 'Remote destinations', icon: '🧭' },
-                { label: 'Eco-Tourism', value: 'eco', desc: 'Wildlife, conservation', icon: '🌿' },
-                { label: 'Cultural Immersion', value: 'culture', desc: 'Local experiences', icon: '🗺️' },
-                { label: 'Budget Adventures', value: 'value', desc: 'Affordable excitement', icon: '💰' }
-            ]
-        }
-    };
-
-    let activeTriggerElement = null;
-
-    // =================================================================
-    // MODAL FUNCTIONS
-    // =================================================================
-    function openModal(category) {
-        const data = modalData[category.toLowerCase()];
-        if (!data) {
-            console.error('No modal data for category:', category);
-            return;
-        }
-
-        activeTriggerElement = document.activeElement;
-        
-        const modal = document.getElementById('followup-modal');
-        const title = document.getElementById('modal-title');
-        const grid = document.getElementById('modal-options-grid');
-        const skipName = document.getElementById('skip-category-name');
-
-        // Update Content
-        title.innerHTML = `Great choice! Want to narrow your <span class="text-lagoon">${data.title}</span> search?`;
-        skipName.innerText = data.title;
-        
-        // Build Options with Icons
-        grid.innerHTML = '';
-        data.options.forEach(opt => {
-            const btn = document.createElement('button');
-            btn.className = "modal-option-btn p-6 bg-sand hover:bg-mist hover:border-lagoon border-2 border-transparent rounded-2xl text-left transition-all group focus:ring-4 focus:ring-coral";
-            btn.onclick = () => goToResults(`${category.toLowerCase()}-${opt.value}`);
-            btn.setAttribute('aria-label', `${opt.label}: ${opt.desc}`);
-            btn.innerHTML = `
-                <span class="block text-3xl mb-2">${opt.icon}</span>
-                <span class="block font-black text-azure uppercase tracking-wider text-sm mb-1 group-hover:translate-x-1 transition-transform">${opt.label}</span>
-                <span class="block text-xs text-slate/60 font-medium">${opt.desc}</span>
-            `;
-            grid.appendChild(btn);
-        });
-
-        // Show Modal
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-        
-        // ADA: Trap Focus
-        modal.addEventListener('keydown', trapFocus);
-        
-        // Focus first interactive element
-        const firstBtn = grid.querySelector('button');
-        if(firstBtn) firstBtn.focus();
-    }
-
-    function closeModal() {
-        const modal = document.getElementById('followup-modal');
-        modal.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-        modal.removeEventListener('keydown', trapFocus);
-        
-        // ADA: Return focus to trigger
-        if(activeTriggerElement) activeTriggerElement.focus();
-    }
-
-    function goToResults(query) {
-        // In production: window.location.href = `results-${query}.html`;
-        console.log(`Navigating to: results-${query}.html`);
-        alert(`Would navigate to: results-${query}.html\n\n(Page not created yet - this is demo mode)`);
-        closeModal();
-    }
-
-    // ADA: Focus Trap Logic
-    function trapFocus(e) {
-        const modal = document.getElementById('followup-modal');
-        const focusableEls = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-        const firstFocusable = focusableEls[0];
-        const lastFocusable = focusableEls[focusableEls.length - 1];
-
-        if (e.key === 'Tab') {
-            if (e.shiftKey) {
-                if (document.activeElement === firstFocusable) {
-                    e.preventDefault();
-                    lastFocusable.focus();
-                }
-            } else {
-                if (document.activeElement === lastFocusable) {
-                    e.preventDefault();
-                    firstFocusable.focus();
-                }
-            }
-        }
-        if (e.key === 'Escape') {
-            closeModal();
-        }
-    }
-
-    // Event Listeners for Modal
-    document.getElementById('followup-modal').addEventListener('click', function(e) {
-        if (e.target === this) closeModal();
-    });
-
-    // =================================================================
-    // ATTACH MODAL TO ALL CATEGORY CARDS
-    // =================================================================
-    document.addEventListener('DOMContentLoaded', () => {
-        // Destinations Deck
-        const destinations = ['caribbean', 'mediterranean', 'europe', 'alaska', 'asia-pacific'];
-        destinations.forEach(dest => {
-            const card = document.getElementById(`card-${dest}`);
-            if(card) {
-                card.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    openModal(dest);
-                });
-            }
-        });
-
-        // Ships Deck
-        const ships = ['ship-family', 'ship-luxury', 'ship-mega', 'ship-adults', 'ship-traditional'];
-        ships.forEach(ship => {
-            const card = document.getElementById(`card-${ship}`);
-            if(card) {
-                card.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    openModal(ship);
-                });
-            }
-        });
-
-        // Travelers Deck
-        const travelers = ['trav-family', 'trav-couples', 'trav-solo', 'trav-highrollers', 'trav-adventurers'];
-        travelers.forEach(trav => {
-            const card = document.getElementById(`card-${trav}`);
-            if(card) {
-                card.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    openModal(trav);
-                });
-            }
-        });
-    });
-
-    // =================================================================
-    // EXISTING SITE FUNCTIONALITY (UNCHANGED)
-    // =================================================================
     
     function switchTab(tabId) {
         ['destinations', 'ships', 'travelers'].forEach(id => {
@@ -857,7 +496,6 @@
             }
         } catch (err) { console.error(err); updateUI('Miami'); }
     }
-    
     function fetchByPort() { const q = document.getElementById('port-search').value; if (q) updateUI(q); }
     function fetchByGPS() { if (navigator.geolocation) { navigator.geolocation.getCurrentPosition((p) => { updateUI(`${p.coords.latitude},${p.coords.longitude}`); }); } }
     function openWeatherDeepLink() { window.open(`https://www.google.com/search?q=weather+${encodeURIComponent(currentLocationName)}`, '_blank'); }
@@ -867,8 +505,10 @@
         s.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
     }
     
-    // INFINITE SCROLL & DRAG LOGIC
+    // --- INFINITE SCROLL & DRAG LOGIC ---
     const slider = document.getElementById('slider');
+    
+    // 1. Clone items to create a [PrefixClone][Original][SuffixClone] structure for infinite looping
     const originalCards = Array.from(slider.children);
     const prefixFragment = document.createDocumentFragment();
     const suffixFragment = document.createDocumentFragment();
@@ -884,6 +524,7 @@
     let isDown = false, startX, scrollLeft;
     let hasMoved = false;
 
+    // 2. Updated Event Listeners (Delegation for Click)
     slider.addEventListener('mousedown', (e) => { 
         isDown = true; 
         hasMoved = false; 
@@ -902,6 +543,7 @@
         slider.scrollLeft = scrollLeft - x; 
     });
 
+    // Delegate click to handle new clones
     slider.addEventListener('click', (e) => {
         const link = e.target.closest('a');
         if (link && hasMoved) {
@@ -910,8 +552,11 @@
         }
     });
 
+    // 3. Infinite Scroll Teleportation Logic
     const handleInfiniteScroll = () => {
         const setWidth = slider.scrollWidth / 3;
+        // Buffer allows the scroll to go slightly into the clone zone before snapping back
+        // This prevents flickering at the exact boundary
         if (slider.scrollLeft <= 50) { 
              slider.scrollLeft += setWidth;
         } else if (slider.scrollLeft >= (setWidth * 2) - 50) { 
@@ -921,17 +566,11 @@
 
     window.onload = () => { 
         updateUI('auto:ip'); 
+        // Initial Center Position
         const setWidth = slider.scrollWidth / 3;
         slider.scrollLeft = setWidth;
+        // Attach listener after initial setup to avoid immediate trigger
         slider.addEventListener('scroll', handleInfiniteScroll);
-        
-        // Remove pulse animation after it completes (2 seconds)
-        setTimeout(() => {
-            const deckButtons = document.getElementById('deck-buttons-container');
-            if(deckButtons) {
-                deckButtons.classList.remove('deck-buttons-initial');
-            }
-        }, 2000);
     };
   </script>
 </body>
