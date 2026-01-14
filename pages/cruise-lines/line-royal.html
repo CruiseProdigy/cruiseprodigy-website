@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Caribbean | Fleet Intelligence Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'], 
+                        'Montserrat': ['Montserrat', 'sans-serif'],
+                        'Poppins': ['Poppins', 'sans-serif'] 
+                    },
+                    colors: { 
+                        // Brand Colors (CruiseProdigy)
+                        azure: '#003B5C', 
+                        lagoon: '#00838F',
+                        coral: '#FF7043',
+                        sand: '#F5F5F5', 
+                        slate: '#546E7A',
+                        mist: '#E0F7FA',
+
+                        // Line Specific Colors (Royal Caribbean)
+                        brandPrimary: '#005DAA', // Royal Blue
+                        brandAccent: '#FFD200',  // Anchor Yellow
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .shadow-premium { box-shadow: 0 2px 4px rgba(0,59,92,0.02), 0 10px 20px rgba(0,59,92,0.04), 0 20px 40px rgba(0,59,92,0.04); }
+        /* ADA Focus Ring (Yellow for Royal) */
+        *:focus-visible { outline: 2px solid #FFD200; outline-offset: 2px; }
+    </style>
+</head>
+<body class="bg-sand text-azure font-sans selection:bg-brandAccent selection:text-brandPrimary">
+
+  <a href="#main-content" class="absolute top-0 left-0 bg-brandPrimary text-white p-3 z-[110] -translate-y-full focus:translate-y-0 transition-transform font-bold shadow-xl rounded-br-lg ring-2 ring-brandAccent">Skip to Main Content</a>
+
+  <nav class="hidden lg:block pointer-events-none fixed inset-y-0 w-full z-[100]">
+      <a href="line-disney.html" class="pointer-events-auto fixed left-6 top-1/2 -translate-y-1/2 bg-white text-brandPrimary p-4 rounded-full shadow-2xl border border-gray-100 hover:bg-mist hover:scale-110 transition-all group focus:outline-none focus:ring-4 focus:ring-brandAccent" aria-label="Navigate to Previous Dossier: Disney Cruise Line">
+          <span class="absolute left-full ml-4 top-1/2 -translate-y-1/2 px-4 py-2 bg-brandPrimary text-white text-xs font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-lg tracking-widest uppercase">Prev: Disney Cruise</span>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      </a>
+      <a href="line-carnival.html" class="pointer-events-auto fixed right-6 top-1/2 -translate-y-1/2 bg-white text-brandPrimary p-4 rounded-full shadow-2xl border border-gray-100 hover:bg-mist hover:scale-110 transition-all group focus:outline-none focus:ring-4 focus:ring-brandAccent" aria-label="Navigate to Next Dossier: Carnival Cruise Line">
+          <span class="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-4 py-2 bg-brandPrimary text-white text-xs font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-lg tracking-widest uppercase">Next: Carnival</span>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </a>
+  </nav>
+
+  <nav class="flex items-center justify-between px-6 md:px-12 py-6 bg-white sticky top-0 z-[60] shadow-sm">
+    <a href="index.html" class="flex flex-col items-start group">
+        <div class="text-3xl md:text-4xl font-['Poppins'] tracking-tight leading-none mb-1">
+            <span class="font-normal text-lagoon">Cruise</span><span class="font-medium text-azure">Prodigy</span>
+        </div>
+        <span class="text-[10px] md:text-xs font-semibold text-azure uppercase tracking-[0.2em] text-left ml-1 font-['Poppins']">Cruise Like A Genius.</span>
+    </a>
+    
+    <div class="hidden md:flex space-x-10 text-azure font-semibold text-xs uppercase tracking-[0.2em]">
+      <a href="index.html#vibe-explorer" class="hover:text-lagoon transition-colors">Explorer</a>
+      <a href="index.html#fleet-intelligence" class="hover:text-lagoon transition-colors">Fleet</a>
+      <a href="index.html#mission-essentials" class="hover:text-lagoon transition-colors">Essentials</a>
+    </div>
+    <button class="bg-azure text-white px-8 py-2.5 rounded-full font-bold text-xs uppercase tracking-widest shadow-lg hover:bg-lagoon transition transform hover:scale-105">Join Community</button>
+  </nav>
+
+  <main id="main-content">
+
+      <header class="bg-brandPrimary py-20 px-8 md:px-12 text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none" aria-hidden="true">
+             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#FFD200" d="M45.7,-76.3C58.9,-69.3,69.1,-55.6,76.3,-40.8C83.5,-26,87.6,-10.2,85.6,4.6C83.6,19.4,75.5,33.2,65.4,44.6C55.2,56,43,65,29.8,70.5C16.6,76,2.4,78,-10.8,76.1C-24,74.2,-36.2,68.4,-47.4,60.2C-58.6,52,-68.9,41.4,-75.4,28.8C-81.9,16.2,-84.6,1.6,-81.4,-11.9C-78.2,-25.4,-69.1,-37.8,-57.8,-46.8C-46.5,-55.8,-32.9,-61.4,-19.4,-68.2C-5.9,-75,7.6,-83,21.8,-82.5C36,-82,49,-73,45.7,-76.3Z" transform="translate(100 100)" />
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
+            <div>
+                <div class="flex items-center space-x-3 mb-4">
+                    <span class="bg-white/10 text-white px-3 py-1 rounded text-[10px] font-bold uppercase tracking-widest">Fleet Dossier: RCI-02</span>
+                    <span class="w-1 h-1 bg-brandAccent rounded-full"></span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-['Poppins'] font-semibold mb-6 tracking-tight leading-none">
+                    Royal <br>
+                    <span class="text-brandAccent font-light">Caribbean</span>
+                </h1>
+                
+                <p class="text-lg text-white/80 font-['Poppins'] font-light max-w-lg leading-relaxed">
+                    The titans of the industry. Royal Caribbean defines the "Mega-Ship" era, consistently building the largest moving objects ever constructed by man.
+                </p>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-2xl grid grid-cols-2 gap-6 text-sm">
+                <div>
+                    <span class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Fleet Size</span>
+                    <span class="text-xl font-bold font-['Poppins']">28 Vessels</span>
+                </div>
+                <div>
+                    <span class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">HQ Location</span>
+                    <span class="text-xl font-bold font-['Poppins']">Miami, FL</span>
+                </div>
+                <div>
+                    <span class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Style</span>
+                    <span class="text-xl font-bold font-['Poppins']">Adventure / Family</span>
+                </div>
+                <div>
+                    <span class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Market Segment</span>
+                    <span class="text-xl font-bold font-['Poppins']">Mass Market</span>
+                </div>
+                <div class="col-span-2 pt-4 border-t border-white/10">
+                     <button onclick="document.getElementById('fleet-section').scrollIntoView({behavior: 'smooth'})" class="w-full bg-brandAccent text-brandPrimary px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-white transition-colors focus:ring-2 focus:ring-brandAccent focus:ring-offset-2 focus:ring-offset-brandPrimary">Access Fleet Data</button>
+                </div>
+            </div>
+        </div>
+      </header>
+
+      <section class="py-20 px-8 md:px-12 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+            <div>
+                <h2 class="text-4xl font-['Poppins'] font-semibold uppercase mb-8 text-brandPrimary leading-tight">The Mission:<br><span class="text-brandPrimary/60 font-light">Innovation at Scale.</span></h2>
+                
+                <p class="text-slate text-lg leading-relaxed mb-6 font-light">Royal Caribbean does not just build ships; they build floating metropolises. Their design philosophy centers on the <strong>"Neighborhood" concept</strong> introduced with the Oasis Class. By splitting the superstructure down the center, they created open-air spaces like Central Park (with 12,000 live plants) and the Boardwalk, effectively eliminating the feeling of being trapped indoors.</p>
+                
+                <p class="text-slate text-lg leading-relaxed mb-6 font-light">They are the undisputed leaders in "Hardware Innovation." From the <strong>FlowRider</strong> surf simulators and ice skating rinks to the <strong>North Star</strong> observation capsule and robotic bartenders, RCI's strategy is to make the ship itself the primary destination, often overshadowing the ports of call.</p>
+
+                <div class="p-6 bg-sand border-l-4 border-brandAccent rounded-r-xl shadow-inner mt-8">
+                    <span class="block text-xs font-bold uppercase text-brandPrimary mb-2 tracking-widest">Operational Insight</span>
+                    <p class="font-medium text-brandPrimary italic text-lg font-['Poppins']">"The sheer size of the Icon/Oasis class absorbs crowds surprisingly well. You can find quiet corners in the Solarium or the Park Cafe while 6,000 other people are congregated at the main pool deck."</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 gap-6 sticky top-32">
+                <div class="bg-mist p-8 rounded-3xl border border-brandPrimary/5 shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold font-['Poppins'] uppercase mb-2 text-brandPrimary">Target: The Active Voyager</h3>
+                    <p class="text-slate text-sm leading-relaxed">Ideal for multigenerational groups where teenagers need high-octane distraction (Water slides, Surf Simulators) and grandparents need Broadway-quality shows (Mama Mia, Grease, Hairspray).</p>
+                </div>
+                <div class="bg-mist p-8 rounded-3xl border border-brandPrimary/5 shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold font-['Poppins'] uppercase mb-2 text-brandPrimary">Target: The Solo Techie</h3>
+                    <p class="text-slate text-sm leading-relaxed">The Quantum Class offers dedicated "Studio" cabins for solo travelers without the single supplement penalty, and the "Bionic Bar" serves as a tech-nerd delight.</p>
+                </div>
+                <div class="bg-mist p-8 rounded-3xl border border-brandPrimary/5 shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold font-['Poppins'] uppercase mb-2 text-brandPrimary">Value Proposition</h3>
+                    <p class="text-slate text-sm leading-relaxed">While pricing is premium compared to Carnival or MSC, the "Wow Factor" per dollar is unmatched. You simply get access to amenities that do not exist on any other fleet in the world.</p>
+                </div>
+            </div>
+        </div>
+      </section>
+
+      <section id="fleet-section" class="py-20 px-8 bg-sand">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-left mb-12">
+                <h2 class="text-4xl font-['Poppins'] font-semibold text-brandPrimary mb-2 tracking-tight">Global Fleet Inventory</h2>
+                <p class="text-slate text-xs tracking-widest font-bold uppercase opacity-60">28 Active/Future Vessels. Ranked by Tonnage.</p>
+            </div>
+            
+            <div class="bg-white rounded-[2rem] shadow-premium overflow-hidden border border-brandPrimary/5">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[1000px]">
+                        <thead>
+                            <tr class="bg-brandPrimary text-white uppercase text-[10px] tracking-[0.2em] font-bold">
+                                <th scope="col" class="p-5 px-8 flex items-center gap-4">
+                                    <span class="text-sm">Vessel Identity</span>
+                                    <span class="bg-brandAccent text-brandPrimary px-3 py-1 rounded-full text-[10px] tracking-widest font-black border border-white/20">Deck Plans</span>
+                                </th>
+                                <th scope="col" class="p-5 px-6">Class Designation</th>
+                                <th scope="col" class="p-5 px-6 text-center">Max Capacity</th>
+                                <th scope="col" class="p-5 px-6 text-right">Commissioned</th>
+                                <th scope="col" class="p-5 px-6 text-right">Deployment</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm font-medium font-['Poppins'] text-slate/80">
+                            
+                            <tr class="bg-mist/50 border-b border-sand">
+                                <td class="p-4 px-8 font-bold text-brandPrimary italic"><a href="https://www.cruisedeckplans.com/ships/Star-of-the-Seas" target="_blank" aria-label="View Deck Plans for Star of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Star of the Seas</span></a></td>
+                                <td>Icon</td><td class="text-center">7,600</td><td class="text-right font-bold text-brandPrimary">2025</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Star of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Icon-of-the-Seas" target="_blank" aria-label="View Deck Plans for Icon of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Icon of the Seas</span></a></td>
+                                <td>Icon</td><td class="text-center">7,600</td><td class="text-right">2024</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Icon of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Utopia-of-the-Seas" target="_blank" aria-label="View Deck Plans for Utopia of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Utopia of the Seas</span></a></td>
+                                <td>Oasis (LNG)</td><td class="text-center">6,988</td><td class="text-right">2024</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Utopia of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Wonder-of-the-Seas" target="_blank" aria-label="View Deck Plans for Wonder of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Wonder of the Seas</span></a></td>
+                                <td>Oasis</td><td class="text-center">6,988</td><td class="text-right">2022</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Wonder of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Symphony-of-the-Seas" target="_blank" aria-label="View Deck Plans for Symphony of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Symphony of the Seas</span></a></td>
+                                <td>Oasis</td><td class="text-center">6,680</td><td class="text-right">2018</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Symphony of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Harmony-of-the-Seas" target="_blank" aria-label="View Deck Plans for Harmony of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Harmony of the Seas</span></a></td>
+                                <td>Oasis</td><td class="text-center">6,687</td><td class="text-right">2016</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Harmony of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Allure-of-the-Seas" target="_blank" aria-label="View Deck Plans for Allure of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Allure of the Seas</span></a></td>
+                                <td>Oasis</td><td class="text-center">6,780</td><td class="text-right">2010</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Allure of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Oasis-of-the-Seas" target="_blank" aria-label="View Deck Plans for Oasis of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Oasis of the Seas</span></a></td>
+                                <td>Oasis</td><td class="text-center">6,780</td><td class="text-right">2009</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Oasis of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Odyssey-of-the-Seas" target="_blank" aria-label="View Deck Plans for Odyssey of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Odyssey of the Seas</span></a></td>
+                                <td>Quantum Ultra</td><td class="text-center">5,510</td><td class="text-right">2021</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Odyssey of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Spectrum-of-the-Seas" target="_blank" aria-label="View Deck Plans for Spectrum of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Spectrum of the Seas</span></a></td>
+                                <td>Quantum Ultra</td><td class="text-center">5,622</td><td class="text-right">2019</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Spectrum of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Ovation-of-the-Seas" target="_blank" aria-label="View Deck Plans for Ovation of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Ovation of the Seas</span></a></td>
+                                <td>Quantum</td><td class="text-center">4,905</td><td class="text-right">2016</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Ovation of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Anthem-of-the-Seas" target="_blank" aria-label="View Deck Plans for Anthem of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Anthem of the Seas</span></a></td>
+                                <td>Quantum</td><td class="text-center">4,905</td><td class="text-right">2015</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Anthem of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Quantum-of-the-Seas" target="_blank" aria-label="View Deck Plans for Quantum of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Quantum of the Seas</span></a></td>
+                                <td>Quantum</td><td class="text-center">4,905</td><td class="text-right">2014</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Quantum of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Independence-of-the-Seas" target="_blank" aria-label="View Deck Plans for Independence of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Independence of the Seas</span></a></td>
+                                <td>Freedom</td><td class="text-center">4,560</td><td class="text-right">2008</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Independence of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Liberty-of-the-Seas" target="_blank" aria-label="View Deck Plans for Liberty of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Liberty of the Seas</span></a></td>
+                                <td>Freedom</td><td class="text-center">4,960</td><td class="text-right">2007</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Liberty of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Freedom-of-the-Seas" target="_blank" aria-label="View Deck Plans for Freedom of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Freedom of the Seas</span></a></td>
+                                <td>Freedom</td><td class="text-center">4,515</td><td class="text-right">2006</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Freedom of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Mariner-of-the-Seas" target="_blank" aria-label="View Deck Plans for Mariner of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Mariner of the Seas</span></a></td>
+                                <td>Voyager</td><td class="text-center">3,807</td><td class="text-right">2003</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Mariner of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Navigator-of-the-Seas" target="_blank" aria-label="View Deck Plans for Navigator of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Navigator of the Seas</span></a></td>
+                                <td>Voyager</td><td class="text-center">3,990</td><td class="text-right">2002</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Navigator of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Adventure-of-the-Seas" target="_blank" aria-label="View Deck Plans for Adventure of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Adventure of the Seas</span></a></td>
+                                <td>Voyager</td><td class="text-center">3,807</td><td class="text-right">2001</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Adventure of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Explorer-of-the-Seas" target="_blank" aria-label="View Deck Plans for Explorer of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Explorer of the Seas</span></a></td>
+                                <td>Voyager</td><td class="text-center">3,840</td><td class="text-right">2000</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Explorer of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Voyager-of-the-Seas" target="_blank" aria-label="View Deck Plans for Voyager of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Voyager of the Seas</span></a></td>
+                                <td>Voyager</td><td class="text-center">4,000</td><td class="text-right">1999</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Voyager of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Jewel-of-the-Seas" target="_blank" aria-label="View Deck Plans for Jewel of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Jewel of the Seas</span></a></td>
+                                <td>Radiance</td><td class="text-center">2,702</td><td class="text-right">2004</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Jewel of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Serenade-of-the-Seas" target="_blank" aria-label="View Deck Plans for Serenade of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Serenade of the Seas</span></a></td>
+                                <td>Radiance</td><td class="text-center">2,476</td><td class="text-right">2003</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Serenade of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Brilliance-of-the-Seas" target="_blank" aria-label="View Deck Plans for Brilliance of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Brilliance of the Seas</span></a></td>
+                                <td>Radiance</td><td class="text-center">2,543</td><td class="text-right">2002</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Brilliance of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Radiance-of-the-Seas" target="_blank" aria-label="View Deck Plans for Radiance of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Radiance of the Seas</span></a></td>
+                                <td>Radiance</td><td class="text-center">2,466</td><td class="text-right">2001</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Radiance of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Vision-of-the-Seas" target="_blank" aria-label="View Deck Plans for Vision of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Vision of the Seas</span></a></td>
+                                <td>Vision</td><td class="text-center">2,514</td><td class="text-right">1998</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Vision of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Rhapsody-of-the-Seas" target="_blank" aria-label="View Deck Plans for Rhapsody of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Rhapsody of the Seas</span></a></td>
+                                <td>Vision</td><td class="text-center">2,416</td><td class="text-right">1997</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Rhapsody of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Enchantment-of-the-Seas" target="_blank" aria-label="View Deck Plans for Enchantment of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Enchantment of the Seas</span></a></td>
+                                <td>Vision</td><td class="text-center">2,446</td><td class="text-right">1997</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Enchantment of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Grandeur-of-the-Seas" target="_blank" aria-label="View Deck Plans for Grandeur of the Seas" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Grandeur of the Seas</span></a></td>
+                                <td>Vision</td><td class="text-center">2,440</td><td class="text-right">1996</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Grandeur of the Seas" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent hover:text-brandPrimary transition">VIEW SAILINGS</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      </section>
+
+      <section class="py-20 px-8 bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+            
+            <div>
+                <h2 class="text-4xl font-['Poppins'] font-semibold uppercase mb-8 text-brandPrimary leading-tight">Engineering <span class="text-brandPrimary/60 font-light">Profile</span></h2>
+                
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="font-bold text-xl text-brandPrimary mb-2 font-['Poppins']">Micro-Bubble Hull Lubrication</h3>
+                        <p class="text-slate leading-relaxed text-sm">The newest <strong>Icon Class</strong> vessels utilize an <strong>Air Lubrication System</strong>. Compressors pump millions of microscopic bubbles along the hull's flat bottom. This carpet of air reduces skin-friction resistance between the steel hull and the seawater, improving fuel efficiency by an estimated 3-5%.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-xl text-brandPrimary mb-2 font-['Poppins']">The AquaDome (Icon Class)</h3>
+                        <p class="text-slate leading-relaxed text-sm">A marvel of structural engineering, the <strong>AquaDome</strong> is the largest glass and steel structure ever lifted onto a cruise ship. Weighing 363 tons, it houses a 55-foot tall waterfall and a robotic aquatheater, requiring a specialized vibration-dampening mounting system to isolate it from hull torque.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-xl text-brandPrimary mb-2 font-['Poppins']">Waste Heat Recovery</h3>
+                        <p class="text-slate leading-relaxed text-sm">To power the massive hotel load (air conditioning for 7,000+ people), RCI ships employ advanced <strong>Steam Turbines</strong> driven by waste heat from the main diesel engine exhaust. This "free energy" loop is critical for maintaining the operational efficiency of mega-ships like the <em>Wonder of the Seas</em>.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mt-8">
+                    <div class="bg-sand p-4 rounded-lg border-l-4 border-brandAccent">
+                        <span class="block text-[10px] font-bold uppercase text-slate tracking-widest">Main Propulsion</span>
+                        <span class="font-mono text-brandPrimary font-bold">3x 20MW Azipods (XO)</span>
+                    </div>
+                    <div class="bg-sand p-4 rounded-lg border-l-4 border-brandAccent">
+                        <span class="block text-[10px] font-bold uppercase text-slate tracking-widest">Bow Thrusters</span>
+                        <span class="font-mono text-brandPrimary font-bold">4x 5.5MW Tunnel Thrusters</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-brandPrimary text-white p-10 rounded-3xl shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-8 opacity-10">
+                    <svg width="200" height="200" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                </div>
+                <h3 class="text-2xl font-bold font-['Poppins'] uppercase mb-6 tracking-widest text-brandAccent">Operational Data</h3>
+                <ul class="space-y-6 font-mono text-sm">
+                    <li class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-60">Design Speed</span>
+                        <span>22.0 Knots (Service)</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-60">Draft (Max)</span>
+                        <span>9.3 Meters (Icon)</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-60">Fuel Type</span>
+                        <span>LNG + MDO (Icon Class)</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-60">Gross Tonnage (Max)</span>
+                        <span>250,800 GT</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-60">Passenger Density</span>
+                        <span>High (35-40 Space Ratio)</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-60">Stabilizers</span>
+                        <span>Fincantieri Active Fins</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+      </section>
+
+      <section id="deployment-cta" class="py-24 px-8 text-center bg-white border-t border-sand">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-['Poppins'] font-semibold mb-6 text-brandPrimary uppercase tracking-tight">Ready to Deploy?</h2>
+            
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 bg-sand p-6 rounded-[2.5rem] shadow-lg max-w-3xl mx-auto">
+                <label for="ship-select" class="sr-only">Select a Royal Caribbean Ship</label>
+                <select id="ship-select" class="flex-1 w-full p-5 rounded-2xl font-bold text-brandPrimary bg-white border-2 border-transparent focus:border-brandAccent focus:ring-2 focus:ring-brandAccent/20 transition font-['Poppins'] outline-none">
+                    <option>Star of the Seas</option><option>Icon of the Seas</option><option>Utopia of the Seas</option><option>Wonder of the Seas</option><option>Symphony of the Seas</option><option>Harmony of the Seas</option><option>Allure of the Seas</option><option>Oasis of the Seas</option><option>Odyssey of the Seas</option><option>Spectrum of the Seas</option><option>Ovation of the Seas</option><option>Anthem of the Seas</option><option>Quantum of the Seas</option><option>Independence of the Seas</option><option>Liberty of the Seas</option><option>Freedom of the Seas</option><option>Mariner of the Seas</option><option>Navigator of the Seas</option><option>Adventure of the Seas</option><option>Explorer of the Seas</option><option>Voyager of the Seas</option><option>Jewel of the Seas</option><option>Serenade of the Seas</option><option>Brilliance of the Seas</option><option>Radiance of the Seas</option><option>Vision of the Seas</option><option>Rhapsody of the Seas</option><option>Enchantment of the Seas</option><option>Grandeur of the Seas</option>
+                </select>
+                <a href="YOUR_AFFILIATE_LINK" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Selected Ship" class="bg-brandAccent text-brandPrimary px-10 py-5 rounded-2xl font-bold uppercase tracking-widest hover:bg-white transition transform hover:scale-[1.02] shadow-xl w-full md:w-auto text-center text-xs">VIEW SAILINGS</a>
+            </div>
+        </div>
+      </section>
+
+  </main>
+
+  <footer class="bg-brandPrimary text-white py-12 text-center border-t border-white/10">
+    <div class="max-w-4xl mx-auto px-8">
+        <div class="text-4xl font-['Poppins'] mb-4 tracking-tight">
+            <span class="font-normal text-white/70">Cruise</span><span class="font-medium text-white">Prodigy</span>
+        </div>
+        <p class="text-[11px] text-white/80 mb-4 italic font-medium">Affiliate Disclosure: Some outbound links on this page may earn a commission at no cost to you.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

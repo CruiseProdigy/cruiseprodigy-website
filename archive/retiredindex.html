@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cruisey v.5.22 | Deep-Link Weather</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], 'Montserrat': ['Montserrat', 'sans-serif'] },
+                    colors: { 
+                        azure: '#003B5C', 
+                        coral: '#FF7043', 
+                        mist: '#E0F7FA', 
+                        lagoon: '#00838F', 
+                        sand: '#F5F5F5', 
+                        slate: '#546E7A', 
+                        // Brand Colors
+                        carnivalRed: '#D32F2F', 
+                        royalBlue: '#0055A5', 
+                        nclAqua: '#00A3E0',
+                        princessBlue: '#0072CE',
+                        mscGold: '#D4AF37',
+                        virginRed: '#E10A1D',
+                        halGold: '#C5A059',
+                        vikingNavy: '#002F6C',
+                        cunardRed: '#B22222'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .carousel-container { perspective: 1200px; }
+        .card-3d { transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); transform-style: preserve-3d; backface-visibility: hidden; }
+        .card-3d:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+        .pulse-red { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+        .bg-glass { background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .weather-art { position: absolute; top: 0; right: 0; width: 100%; height: 100%; opacity: 0.1; pointer-events: none; z-index: 0; }
+        .sticky-ribbon { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        
+        /* Tab Logic */
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: grid; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-sand font-sans text-azure selection:bg-coral selection:text-white">
+
+  <nav class="hidden md:flex items-center justify-between px-12 py-8 bg-white shadow-sm w-full relative z-[60]">
+    <a href="index.html" class="flex items-baseline space-x-4 group">
+      <span class="text-4xl font-extrabold tracking-tighter text-azure font-['Montserrat']">Cruisey</span>
+      <span class="text-base italic font-semibold text-slate tracking-tight">Eat. Sleep. Cruise. Repeat.</span>
+    </a>
+    <div class="flex space-x-12 text-azure font-bold text-lg">
+      <a href="#vibe-explorer" class="hover:text-lagoon transition">Explorer</a>
+      <a href="#field-reports" class="hover:text-lagoon transition">Reports</a>
+      <a href="#mission-essentials" class="hover:text-lagoon transition">Essentials</a>
+    </div>
+    <button class="bg-coral text-white px-10 py-3 rounded-full font-bold text-lg shadow-lg hover:bg-[#f4511e] transition transform hover:scale-105">Join Community</button>
+  </nav>
+
+  <header class="relative flex flex-col items-center justify-center px-4 py-20 md:py-28 text-center overflow-hidden bg-white">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-mist rounded-full blur-3xl -z-10 opacity-60"></div>
+    <h1 class="text-5xl md:text-7xl font-bold text-azure mb-10 font-['Montserrat'] tracking-tight">Find Your <span class="text-lagoon">Perfect Voyage.</span></h1>
+    <div class="w-full max-w-2xl bg-white p-2 rounded-full shadow-2xl flex flex-col md:flex-row items-center border border-gray-100 relative z-10">
+        <input type="text" id="hero-search-input" placeholder="Where to?" class="flex-1 w-full px-8 py-4 text-xl outline-none rounded-full" />
+        <button onclick="document.getElementById('weather-ribbon').scrollIntoView({behavior: 'smooth'})" class="w-full md:w-auto bg-azure text-white px-10 py-4 rounded-full font-bold text-lg shadow-lg hover:bg-lagoon transition-colors uppercase tracking-widest">Search</button>
+    </div>
+  </header>
+
+  <section id="weather-ribbon" class="sticky-ribbon py-4 px-8 bg-azure text-white shadow-xl">
+    <div id="weather-art-bg" class="weather-art"></div>
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-6 relative z-10">
+        
+        <div onclick="openWeatherDeepLink()" class="flex items-center space-x-6 cursor-pointer p-2 -ml-2 rounded-xl hover:bg-white/10 transition-colors group" title="Click for detailed forecast">
+            <div>
+                <div class="flex items-center space-x-2 mb-1">
+                    <span class="w-1.5 h-1.5 bg-red-500 rounded-full pulse-red"></span>
+                    <span class="text-[9px] font-black uppercase tracking-[0.2em] text-[#4DD0E1] group-hover:text-white transition-colors">Maritime Intelligence Hub</span>
+                </div>
+                <h2 id="hub-city" class="text-2xl font-bold font-['Montserrat'] leading-none">Locating...</h2>
+            </div>
+            <div class="flex items-center space-x-4 border-l border-white/10 pl-6">
+                <span id="temp-val" class="text-4xl font-black font-['Montserrat']">--°</span>
+                <div class="hidden sm:block">
+                    <p id="condition-text" class="text-xs font-bold uppercase tracking-tighter">Syncing...</p>
+                    <div class="flex space-x-3 mt-0.5">
+                        <p class="text-[9px] font-bold text-gray-400">WIND: <span id="wind-val" class="text-white">--</span></p>
+                        <p class="text-[9px] font-bold text-gray-400">UV: <span id="uv-val" class="text-white">--</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="forecast-container" class="flex items-center space-x-6 overflow-x-auto no-scrollbar border-l border-white/10 pl-6 w-full lg:w-auto">
+            <div class="text-center min-w-[50px]"><p id="f1-date" class="text-[9px] font-black opacity-40 uppercase mb-0.5">--</p><div id="f1-icon" class="text-lg">⏳</div><p class="text-xs font-bold"><span id="f1-high">--</span>°</p></div>
+            <div class="text-center min-w-[50px]"><p id="f2-date" class="text-[9px] font-black opacity-40 uppercase mb-0.5">--</p><div id="f2-icon" class="text-lg">⏳</div><p class="text-xs font-bold"><span id="f2-high">--</span>°</p></div>
+            <div class="text-center min-w-[50px]"><p id="f3-date" class="text-[9px] font-black opacity-40 uppercase mb-0.5">--</p><div id="f3-icon" class="text-lg">⏳</div><p class="text-xs font-bold"><span id="f3-high">--</span>°</p></div>
+            <div class="text-center min-w-[50px]"><p id="f4-date" class="text-[9px] font-black opacity-40 uppercase mb-0.5">--</p><div id="f4-icon" class="text-lg">⏳</div><p class="text-xs font-bold"><span id="f4-high">--</span>°</p></div>
+            <div class="text-center min-w-[50px]"><p id="f5-date" class="text-[9px] font-black opacity-40 uppercase mb-0.5">--</p><div id="f5-icon" class="text-lg">⏳</div><p class="text-xs font-bold"><span id="f5-high">--</span>°</p></div>
+        </div>
+
+        <div class="flex items-center space-x-3">
+            <div class="relative">
+                <input id="port-search" type="text" placeholder="Search any port..." class="bg-white text-azure placeholder-slate-400 rounded-lg px-4 py-2.5 text-sm font-bold outline-none w-64 shadow-lg focus:ring-2 focus:ring-lagoon transition-all">
+                <button onclick="fetchByPort()" class="absolute right-1.5 top-1.5 bg-lagoon text-white p-1.5 rounded-md hover:bg-azure transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></button>
+            </div>
+            <button onclick="fetchByGPS()" class="text-[10px] font-black uppercase tracking-widest bg-white/10 px-4 py-2.5 rounded-lg border border-white/20 hover:bg-white/20 transition-all">GPS</button>
+        </div>
+    </div>
+  </section>
+
+  <section id="vibe-explorer" class="py-24 px-8 bg-mist">
+    <div class="max-w-6xl mx-auto">
+        <div class="flex flex-col md:flex-row items-center justify-between mb-12">
+            <div>
+                <h2 class="text-4xl font-bold text-azure font-['Montserrat'] tracking-tighter uppercase mb-2">Vibe Explorer</h2>
+                <p id="deck-label" class="text-xs font-black text-lagoon uppercase tracking-[0.4em]">Current Deck: Destinations</p>
+            </div>
+            <div class="flex bg-white p-1.5 rounded-2xl shadow-lg mt-6 md:mt-0">
+                <button onclick="switchTab('destinations')" id="btn-destinations" class="px-8 py-3 rounded-xl font-bold text-sm uppercase tracking-widest transition-all bg-azure text-white shadow-md">Destinations</button>
+                <button onclick="switchTab('ships')" id="btn-ships" class="px-8 py-3 rounded-xl font-bold text-sm uppercase tracking-widest transition-all text-azure hover:bg-mist">Ships</button>
+                <button onclick="switchTab('travelers')" id="btn-travelers" class="px-8 py-3 rounded-xl font-bold text-sm uppercase tracking-widest transition-all text-azure hover:bg-mist">Travelers</button>
+            </div>
+        </div>
+
+        <div id="tab-destinations" class="grid grid-cols-1 md:grid-cols-3 gap-10 active">
+            <div onclick="updateHubFromVibe('Caribbean')" class="group relative aspect-video rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all cursor-pointer"><img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&w=800&q=80" alt="Caribbean" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform"><div class="absolute inset-0 bg-black/20"></div><span class="absolute bottom-8 left-8 text-white font-bold text-2xl uppercase">Caribbean</span></div>
+            <div onclick="updateHubFromVibe('Alaska')" class="group relative aspect-video rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all cursor-pointer"><img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=800&q=80" alt="Alaska" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform"><div class="absolute inset-0 bg-black/20"></div><span class="absolute bottom-8 left-8 text-white font-bold text-2xl uppercase">Alaska</span></div>
+            <div onclick="updateHubFromVibe('Europe')" class="group relative aspect-video rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all cursor-pointer"><img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80" alt="Europe" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform"><div class="absolute inset-0 bg-black/20"></div><span class="absolute bottom-8 left-8 text-white font-bold text-2xl uppercase">Europe</span></div>
+            <div onclick="updateHubFromVibe('Miami')" class="group relative aspect-video rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all cursor-pointer"><img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=800&q=80" alt="On-the-Grid" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform"><div class="absolute inset-0 bg-black/20"></div><span class="absolute bottom-8 left-8 text-white font-bold text-2xl uppercase">On-the-Grid</span></div>
+            <div onclick="updateHubFromVibe('Asia')" class="group relative aspect-video rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all cursor-pointer"><img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80" alt="Asia" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform"><div class="absolute inset-0 bg-black/20"></div><span class="absolute bottom-8 left-8 text-white font-bold text-2xl uppercase">Asia</span></div>
+            <div class="group relative aspect-video rounded-3xl border-4 border-dashed border-azure/20 flex items-center justify-center hover:bg-azure transition shadow-lg"><span class="text-azure font-bold text-2xl group-hover:text-white uppercase font-['Montserrat'] tracking-widest text-center">View Map</span></div>
+        </div>
+
+        <div id="tab-ships" class="grid grid-cols-1 md:grid-cols-3 gap-10 hidden">
+            <div class="group relative aspect-video rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all cursor-pointer"><img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=800&q=80" alt="Nightlife" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform"><div class="absolute inset-0 bg-black/30"></div><span class="absolute bottom-8 left-8 text-white font-bold text-2xl uppercase">Nightlife</span></div>
+            <div class="group relative aspect-video rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all cursor-pointer"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" alt="Spa" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform"><div class="absolute inset-0 bg-black/30"></div><span class="absolute bottom-8 left-8 text-white font-bold text-2xl uppercase">Spa & Wellness</span></div>
+            <div class="group relative aspect-video rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all cursor-pointer"><img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=800&q=80" alt="Sports" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform"><div class="absolute inset-0 bg-black/30"></div><span class="absolute bottom-8 left-8 text-white font-bold text-2xl uppercase">Sports & Action</span></div>
+            <div class="group relative aspect-video rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all cursor-pointer"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80" alt="Fine Dining" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform"><div class="absolute inset-0 bg-black/30"></div><span class="absolute bottom-8 left-8 text-white font-bold text-2xl uppercase">Fine Dining</span></div>
+            <div class="group relative aspect-video rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all cursor-pointer"><img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=800&q=80" alt="Live Shows" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform"><div class="absolute inset-0 bg-black/30"></div><span class="absolute bottom-8 left-8 text-white font-bold text-2xl uppercase">Live Shows</span></div>
+            <div class="group relative aspect-video rounded-3xl border-4 border-dashed border-azure/20 flex items-center justify-center hover:bg-azure transition shadow-lg"><span class="text-azure font-bold text-2xl group-hover:text-white uppercase font-['Montserrat'] tracking-widest text-center">All Features</span></div>
+        </div>
+
+        <div id="tab-travelers" class="grid grid-cols-1 md:grid-cols-3 gap-10 hidden">
+            <div class="group relative aspect-video rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all cursor-pointer"><img src="https://images.unsplash.com/photo-1606041008023-472dfb5e530f?auto=format&fit=crop&w=800&q=80" alt="Family" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform"><div class="absolute inset-0 bg-black/20"></div><span class="relative z-10 font-bold text-white uppercase text-2xl ml-8 mt-48 block">Family</span></div>
+            <div class="group relative aspect-video rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all cursor-pointer"><img src="https://images.unsplash.com/photo-1516726817505-f5ed825624d8?auto=format&fit=crop&w=800&q=80" alt="Couples" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform"><div class="absolute inset-0 bg-black/20"></div><span class="relative z-10 font-bold text-white uppercase text-2xl ml-8 mt-48 block">Couples</span></div>
+            <div class="group relative aspect-video rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all cursor-pointer"><img src="https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=800&q=80" alt="Solo" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform"><div class="absolute inset-0 bg-black/20"></div><span class="relative z-10 font-bold text-white uppercase text-2xl ml-8 mt-48 block">Solo</span></div>
+            <div class="group relative aspect-video rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all cursor-pointer"><img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?auto=format&fit=crop&w=800&q=80" alt="Luxury" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform"><div class="absolute inset-0 bg-black/20"></div><span class="relative z-10 font-bold text-white uppercase text-2xl ml-8 mt-48 block">Luxury</span></div>
+            <div class="group relative aspect-video rounded-3xl overflow-hidden shadow-xl hover:-translate-y-2 transition-all cursor-pointer"><img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=800&q=80" alt="Adventure" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform"><div class="absolute inset-0 bg-black/20"></div><span class="relative z-10 font-bold text-white uppercase text-2xl ml-8 mt-48 block">Adventure</span></div>
+            <div class="group relative aspect-video rounded-3xl border-4 border-dashed border-coral/30 flex items-center justify-center hover:bg-coral group transition shadow-lg"><span class="text-coral group-hover:text-white font-bold text-2xl uppercase tracking-widest text-center">My Style</span></div>
+        </div>
+    </div>
+  </section>
+
+  <section id="fleet-intelligence" class="py-24 bg-white overflow-hidden select-none">
+    <div class="max-w-6xl mx-auto px-8 mb-12 flex justify-between items-end">
+        <div><h2 class="text-4xl font-bold text-azure font-['Montserrat'] uppercase tracking-tight">Browse Fleet Intelligence</h2></div>
+        
+        <div class="hidden md:flex space-x-4">
+            <button onclick="scrollFleet(-1)" class="bg-sand hover:bg-azure hover:text-white text-azure w-12 h-12 rounded-full flex items-center justify-center transition shadow-md border border-gray-200">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button onclick="scrollFleet(1)" class="bg-sand hover:bg-azure hover:text-white text-azure w-12 h-12 rounded-full flex items-center justify-center transition shadow-md border border-gray-200">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
+        </div>
+    </div>
+    
+    <div id="slider" class="flex overflow-x-auto pb-16 space-x-10 px-8 no-scrollbar cursor-grab md:justify-start">
+        
+        <a href="line-disney.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-48 bg-white rounded-3xl shadow-xl flex flex-col items-center justify-center p-8 border border-gray-100 text-center">
+                <span class="text-3xl mb-3">🏰</span>
+                <span class="font-bold text-azure text-2xl font-['Montserrat']">Disney Cruise</span>
+            </div>
+        </a>
+        
+        <a href="line-royal.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-48 bg-white rounded-3xl shadow-xl flex flex-col items-center justify-center p-8 border border-gray-100 text-center">
+                <span class="text-3xl mb-3">👑</span>
+                <span class="font-bold text-royalBlue text-2xl font-['Montserrat']">Royal Caribbean</span>
+            </div>
+        </a>
+        
+        <a href="line-carnival.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-48 bg-white rounded-3xl shadow-xl flex flex-col items-center justify-center p-8 border border-gray-100 text-center">
+                <span class="text-3xl mb-3">⚓</span>
+                <span class="font-bold text-carnivalRed text-2xl font-['Montserrat'] uppercase tracking-widest">Carnival</span>
+            </div>
+        </a>
+        
+        <a href="line-norwegian.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-48 bg-white rounded-3xl shadow-xl flex flex-col items-center justify-center p-8 border border-gray-100 text-center">
+                <span class="text-3xl mb-3">🌊</span>
+                <span class="font-bold text-nclAqua text-2xl font-['Montserrat']">Norwegian</span>
+            </div>
+        </a>
+
+        <a href="line-princess.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-48 bg-white rounded-3xl shadow-xl flex flex-col items-center justify-center p-8 border border-gray-100 text-center">
+                <span class="text-3xl mb-3">👸</span>
+                <span class="font-bold text-princessBlue text-2xl font-['Montserrat']">Princess</span>
+            </div>
+        </a>
+
+        <a href="line-msc.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-48 bg-white rounded-3xl shadow-xl flex flex-col items-center justify-center p-8 border border-gray-100 text-center">
+                <span class="text-3xl mb-3">💎</span>
+                <span class="font-bold text-mscGold text-2xl font-['Montserrat']">MSC Cruises</span>
+            </div>
+        </a>
+
+        <a href="line-virgin.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-48 bg-white rounded-3xl shadow-xl flex flex-col items-center justify-center p-8 border border-gray-100 text-center">
+                <span class="text-3xl mb-3">💋</span>
+                <span class="font-bold text-virginRed text-2xl font-['Montserrat']">Virgin Voyages</span>
+            </div>
+        </a>
+
+        <a href="line-holland.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-48 bg-white rounded-3xl shadow-xl flex flex-col items-center justify-center p-8 border border-gray-100 text-center">
+                <span class="text-3xl mb-3">🌷</span>
+                <span class="font-bold text-halGold text-2xl font-['Montserrat']">Holland America</span>
+            </div>
+        </a>
+
+        <a href="line-viking.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-48 bg-white rounded-3xl shadow-xl flex flex-col items-center justify-center p-8 border border-gray-100 text-center">
+                <span class="text-3xl mb-3">🛡️</span>
+                <span class="font-bold text-vikingNavy text-2xl font-['Montserrat']">Viking</span>
+            </div>
+        </a>
+
+        <a href="line-cunard.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-48 bg-white rounded-3xl shadow-xl flex flex-col items-center justify-center p-8 border border-gray-100 text-center">
+                <span class="text-3xl mb-3">🦁</span>
+                <span class="font-bold text-cunardRed text-2xl font-['Montserrat']">Cunard</span>
+            </div>
+        </a>
+
+    </div>
+  </section>
+
+  <section id="mission-essentials" class="py-28 px-8 bg-sand">
+    <div class="max-w-6xl mx-auto mb-20">
+        <h2 class="text-4xl font-bold text-azure font-['Montserrat'] mb-6 uppercase tracking-widest text-center">Mission Essentials</h2>
+    </div>
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div class="bg-sand rounded-3xl p-10 shadow-xl flex flex-col h-full hover:shadow-2xl transition-shadow">
+          <div class="h-64 bg-gray-200 rounded-2xl mb-8 overflow-hidden"><img src="https://images.unsplash.com/photo-1585338665768-3c070c792138?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Hooks"></div>
+          <h3 class="text-2xl font-bold text-azure mb-3 uppercase">Magnetic Hooks</h3>
+          <a href="#" target="_blank" rel="sponsored noopener" class="mt-auto w-full border-2 border-azure text-azure text-center font-bold py-4 rounded-2xl hover:bg-azure hover:text-white transition uppercase">Shop Mission Prep</a>
+      </div>
+      <div class="bg-sand rounded-3xl p-10 shadow-xl flex flex-col h-full hover:shadow-2xl transition-shadow">
+          <div class="h-64 bg-gray-200 rounded-2xl mb-8 overflow-hidden"><img src="https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&w=800&q=80" alt="Power"></div>
+          <h3 class="text-2xl font-bold text-azure mb-3 uppercase">Power Bank</h3>
+          <a href="#" target="_blank" rel="sponsored noopener" class="mt-auto w-full border-2 border-azure text-azure text-center font-bold py-4 rounded-2xl hover:bg-azure hover:text-white transition uppercase">Shop Mission Prep</a>
+      </div>
+      <div class="bg-sand rounded-3xl p-10 shadow-xl flex flex-col h-full hover:shadow-2xl transition-shadow">
+          <div class="h-64 bg-gray-200 rounded-2xl mb-8 overflow-hidden"><img src="https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?auto=format&fit=crop&w=800&q=80" alt="Ducks"></div>
+          <h3 class="text-2xl font-bold text-azure mb-3 uppercase">Mini Ducks</h3>
+          <a href="#" target="_blank" rel="sponsored noopener" class="mt-auto w-full border-2 border-azure text-azure text-center font-bold py-4 rounded-2xl hover:bg-azure hover:text-white transition uppercase font-black">Shop Pack</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-azure text-white pt-24 pb-12 text-center border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-8 flex flex-col items-center">
+        <span class="text-4xl font-extrabold font-['Montserrat'] mb-4">Cruisey</span>
+        <p class="text-[11px] text-white/60 mb-6 italic font-medium max-w-lg mx-auto">Affiliate Disclosure: Some outbound links on this site may earn a commission at no cost to you.</p>
+        <p class="text-sm opacity-40 uppercase tracking-widest">© 2026 Cruisey Interactive Intel</p>
+    </div>
+  </footer>
+
+  <script>
+    const API_KEY = '63db0fe991cd41d4ae0195810260401';
+    let currentLocationName = "Miami"; 
+
+    // TAB LOGIC
+    function switchTab(tabId) {
+        ['destinations', 'ships', 'travelers'].forEach(id => {
+            document.getElementById('btn-' + id).className = "px-8 py-3 rounded-xl font-bold text-sm text-azure hover:bg-mist transition-all uppercase";
+            document.getElementById('tab-' + id).classList.add('hidden');
+        });
+        document.getElementById('btn-' + tabId).className = "px-8 py-3 rounded-xl font-bold text-sm bg-azure text-white shadow-md uppercase transition-all";
+        document.getElementById('tab-' + tabId).classList.remove('hidden');
+        const labels = { 'destinations': 'Current Deck: Destinations', 'ships': 'Current Deck: Ship Interiors', 'travelers': 'Current Deck: Traveler Types' };
+        document.getElementById('deck-label').innerText = labels[tabId];
+    }
+
+    // REGION MAPPING
+    function updateHubFromVibe(region) {
+        const map = { 'Caribbean': 'Nassau', 'Alaska': 'Juneau', 'Europe': 'Barcelona', 'Asia': 'Singapore', 'Miami': 'Miami' };
+        updateUI(map[region] || 'Miami');
+        document.getElementById('weather-ribbon').scrollIntoView({behavior: 'smooth'});
+    }
+
+    function openWeatherDeepLink() {
+        const query = encodeURIComponent(`weather ${currentLocationName}`);
+        window.open(`https://www.google.com/search?q=${query}`, '_blank');
+    }
+
+    // WEATHER LOGIC
+    async function updateUI(location) {
+        try {
+            const res = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=5`);
+            const d = await res.json();
+            currentLocationName = d.location.name;
+            document.getElementById('hub-city').innerText = d.location.name.toUpperCase();
+            document.getElementById('temp-val').innerText = `${Math.round(d.current.temp_f)}°`;
+            document.getElementById('condition-text').innerText = d.current.condition.text;
+            document.getElementById('wind-val').innerText = Math.round(d.current.wind_mph);
+            document.getElementById('uv-val').innerText = d.current.uv;
+            const days = d.forecast.forecastday;
+            for(let i=0; i<5; i++) {
+                const day = days[i];
+                document.getElementById(`f${i+1}-date`).innerText = i === 0 ? "Today" : new Date(day.date + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'short' });
+                document.getElementById(`f${i+1}-high`).innerText = Math.round(day.day.maxtemp_f);
+                const c = day.day.condition.text.toLowerCase();
+                document.getElementById(`f${i+1}-icon`).innerText = c.includes('sun') || c.includes('clear') ? '☀️' : (c.includes('rain') ? '🌧️' : '☁️');
+            }
+        } catch (err) { console.error(err); updateUI('Miami'); }
+    }
+    
+    function fetchByPort() { const q = document.getElementById('port-search').value; if (q) updateUI(q); }
+    function fetchByGPS() { if (navigator.geolocation) { navigator.geolocation.getCurrentPosition((p) => { updateUI(`${p.coords.latitude},${p.coords.longitude}`); }); } }
+    window.onload = () => { updateUI('auto:ip'); };
+
+    // NEW CAROUSEL BUTTON LOGIC
+    function scrollFleet(dir) {
+        const s = document.getElementById('slider');
+        const scrollAmount = 360; // Card width (320) + Gap (40)
+        s.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+    }
+
+    // Mouse drag fallback logic maintained for hybrid devices
+    const slider = document.getElementById('slider');
+    let isDown = false, startX, scrollLeft;
+    slider.addEventListener('mousedown', (e) => { isDown = true; startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; });
+    slider.addEventListener('mouseleave', () => { isDown = false; });
+    slider.addEventListener('mouseup', () => { isDown = false; });
+    slider.addEventListener('mousemove', (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX - slider.offsetLeft - startX) * 2; slider.scrollLeft = scrollLeft - x; });
+  </script>
+</body>
+</html>

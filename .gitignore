@@ -1,0 +1,30 @@
+# System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor Folders
+.vscode/
+.idea/
+
+# Temporary Files
+*.tmp
+*.log
+~$*
+temp.html
+test*.html
+
+# Backups
+*.bak
+*_backup.*
+*_old.*
+
+# OneDrive
+*.onedrive
+.onedrive/
+
+# Large files
+*.psd
+*.ai
+*.zip
+*.rar

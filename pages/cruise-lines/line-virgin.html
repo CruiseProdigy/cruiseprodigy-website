@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virgin Voyages | Fleet Intelligence Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'], 
+                        'Montserrat': ['Montserrat', 'sans-serif'],
+                        'Poppins': ['Poppins', 'sans-serif'] 
+                    },
+                    colors: { 
+                        // Brand Colors (CruiseProdigy)
+                        azure: '#003B5C', 
+                        lagoon: '#00838F',
+                        coral: '#FF7043',
+                        sand: '#F5F5F5', 
+                        slate: '#546E7A',
+                        mist: '#E0F7FA',
+
+                        // Line Specific Colors (Virgin)
+                        brandPrimary: '#1A1A1A', // Rockstar Charcoal
+                        brandAccent: '#E10A1D',  // Virgin Red
+                        brandTeal: '#40E0D0',    // Sea Accent
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .shadow-premium { box-shadow: 0 2px 4px rgba(225,10,29,0.05), 0 10px 20px rgba(26,26,26,0.05), 0 20px 40px rgba(26,26,26,0.05); }
+        /* ADA Focus Ring (Red for Visibility) */
+        *:focus-visible { outline: 2px solid #E10A1D; outline-offset: 2px; }
+    </style>
+</head>
+<body class="bg-sand text-brandPrimary font-sans selection:bg-brandPrimary selection:text-white antialiased">
+
+  <a href="#main-content" class="absolute top-0 left-0 bg-brandAccent text-white p-3 z-[110] -translate-y-full focus:translate-y-0 transition-transform font-bold shadow-xl rounded-br-lg ring-2 ring-brandPrimary">Skip to Main Content</a>
+
+  <nav class="hidden lg:block pointer-events-none fixed inset-y-0 w-full z-[100]">
+      <a href="line-msc.html" class="pointer-events-auto fixed left-6 top-1/2 -translate-y-1/2 bg-white text-brandPrimary p-4 rounded-full shadow-2xl border border-gray-100 hover:bg-mist hover:scale-110 transition-all group focus:outline-none focus:ring-4 focus:ring-brandAccent" aria-label="Navigate to Previous Dossier: MSC Cruises">
+          <span class="absolute left-full ml-4 top-1/2 -translate-y-1/2 px-4 py-2 bg-brandPrimary text-white text-xs font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-lg tracking-widest uppercase">Prev: MSC Cruises</span>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      </a>
+      <a href="line-holland.html" class="pointer-events-auto fixed right-6 top-1/2 -translate-y-1/2 bg-white text-brandPrimary p-4 rounded-full shadow-2xl border border-gray-100 hover:bg-mist hover:scale-110 transition-all group focus:outline-none focus:ring-4 focus:ring-brandAccent" aria-label="Navigate to Next Dossier: Holland America Line">
+          <span class="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-4 py-2 bg-brandPrimary text-white text-xs font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-lg tracking-widest uppercase">Next: Holland America</span>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </a>
+  </nav>
+
+  <nav class="flex items-center justify-between px-6 md:px-12 py-6 bg-white sticky top-0 z-[60] shadow-sm">
+    <a href="index.html" class="flex flex-col items-start group">
+        <div class="text-3xl md:text-4xl font-['Poppins'] tracking-tight leading-none mb-1">
+            <span class="font-normal text-lagoon">Cruise</span><span class="font-medium text-azure">Prodigy</span>
+        </div>
+        <span class="text-[10px] md:text-xs font-semibold text-azure uppercase tracking-[0.2em] text-left ml-1 font-['Poppins']">Cruise Like A Genius.</span>
+    </a>
+    
+    <div class="hidden md:flex space-x-10 text-azure font-semibold text-xs uppercase tracking-[0.2em]">
+      <a href="index.html#vibe-explorer" class="hover:text-lagoon transition-colors">Explorer</a>
+      <a href="index.html#fleet-intelligence" class="hover:text-lagoon transition-colors">Fleet</a>
+      <a href="index.html#mission-essentials" class="hover:text-lagoon transition-colors">Essentials</a>
+    </div>
+    <button class="bg-azure text-white px-8 py-2.5 rounded-full font-bold text-xs uppercase tracking-widest shadow-lg hover:bg-lagoon transition transform hover:scale-105">Join Community</button>
+  </nav>
+
+  <main id="main-content">
+
+      <header class="bg-brandPrimary py-20 px-8 md:px-12 text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none" aria-hidden="true">
+             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#E10A1D" d="M39.9,-65.7C50.8,-53.4,57.9,-38.3,62.8,-22.4C67.7,-6.6,70.3,9.9,64.8,23.3C59.3,36.7,45.7,46.9,31.7,53.4C17.7,60,3.3,62.8,-11.4,63.4C-26.1,64,-41.1,62.4,-52.1,53.7C-63.1,45.1,-70.1,29.3,-71.4,13.2C-72.7,-2.9,-68.3,-19.4,-58.5,-32.4C-48.7,-45.4,-33.4,-55,-19.2,-60.8C-5,-66.6,12.5,-68.6,29,-78L39.9,-65.7Z" transform="translate(100 100)" />
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
+            <div>
+                <div class="flex items-center space-x-3 mb-4">
+                    <span class="bg-white/10 text-white px-3 py-1 rounded text-[10px] font-bold uppercase tracking-widest">Fleet Dossier: VV-11</span>
+                    <span class="w-1 h-1 bg-brandAccent rounded-full"></span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-['Poppins'] font-semibold mb-6 tracking-tight leading-none">
+                    Virgin <br>
+                    <span class="text-brandAccent font-light">Voyages</span>
+                </h1>
+                
+                <p class="text-lg text-white/80 font-['Poppins'] font-light max-w-lg leading-relaxed">
+                    Rebellious Luxury. Virgin Voyages disrupted the industry by banning buffets, eliminating "kids clubs" entirely, and creating an "Adult-by-Design" yacht experience at scale.
+                </p>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-2xl grid grid-cols-2 gap-6 text-sm">
+                <div>
+                    <span class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Fleet Size</span>
+                    <span class="text-xl font-bold font-['Poppins']">4 Vessels</span>
+                </div>
+                <div>
+                    <span class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">HQ Location</span>
+                    <span class="text-xl font-bold font-['Poppins']">Plantation, FL</span>
+                </div>
+                <div>
+                    <span class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Style</span>
+                    <span class="text-xl font-bold font-['Poppins']">Modern RockStar</span>
+                </div>
+                <div>
+                    <span class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Market Segment</span>
+                    <span class="text-xl font-bold font-['Poppins']">Adult Premium</span>
+                </div>
+                <div class="col-span-2 pt-4 border-t border-white/10">
+                     <button onclick="document.getElementById('fleet-section').scrollIntoView({behavior: 'smooth'})" class="w-full bg-brandAccent text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-white hover:text-brandPrimary transition-colors focus:ring-2 focus:ring-white">Access Fleet Data</button>
+                </div>
+            </div>
+        </div>
+      </header>
+
+      <section class="py-20 px-8 md:px-12 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+            <div>
+                <h2 class="text-4xl font-['Poppins'] font-semibold uppercase mb-8 text-brandPrimary leading-tight">The Mission:<br><span class="text-brandAccent font-light">Set Sail The Virgin Way.</span></h2>
+                
+                <p class="text-slate text-lg leading-relaxed mb-6 font-light">Virgin Voyages is the antithesis of the traditional cruise. They have scrapped the "Main Dining Room" concept entirely. Instead, there are 20+ eateries (from a Korean BBQ to a vegetarian-forward laboratory) and <strong>all food is included</strong> in the fare. There are no upcharges for specialty dining.</p>
+                
+                <p class="text-slate text-lg leading-relaxed mb-6 font-light">The on-board vibe is strictly 18+. This allows for a completely different atmosphere—drag brunch shows, a two-story nightclub (The Manor) inspired by Richard Branson's first music studio, and a pool deck that feels more like Ibiza than Orlando. It is designed for travelers who think they hate cruises.</p>
+
+                <div class="p-6 bg-sand border-l-4 border-brandAccent rounded-r-xl shadow-inner mt-8">
+                    <span class="block text-xs font-bold uppercase text-brandAccent mb-2 tracking-widest">Operational Insight</span>
+                    <p class="font-medium text-brandPrimary italic text-lg font-['Poppins']">"Virgin Voyages includes 'Essential Drinks' (soda, water, drip coffee) and Wi-Fi in the base fare. They also eliminated tipping/gratuities entirely—the price you see is the price you pay."</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 gap-6 sticky top-32">
+                <div class="bg-mist p-8 rounded-3xl border border-brandPrimary/5 shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold font-['Poppins'] uppercase mb-2 text-brandPrimary">Target: The Non-Cruiser</h3>
+                    <p class="text-slate text-sm leading-relaxed">Designed for Millennials and Gen X who prefer boutique hotels to mega-resorts. If you care about fitness (the gym is massive), sustainability, and craft cocktails, this is the fleet for you.</p>
+                </div>
+                <div class="bg-mist p-8 rounded-3xl border border-brandPrimary/5 shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold font-['Poppins'] uppercase mb-2 text-brandPrimary">Target: The "RockStar"</h3>
+                    <p class="text-slate text-sm leading-relaxed">The "Mega RockStar" suites are among the most hedonistic at sea, featuring electric guitars in the room, a private "Richard's Rooftop" sundeck, and a dedicated "Roadie" (butler) to handle your logistics.</p>
+                </div>
+                <div class="bg-mist p-8 rounded-3xl border border-brandPrimary/5 shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold font-['Poppins'] uppercase mb-2 text-brandPrimary">Value Proposition</h3>
+                    <p class="text-slate text-sm leading-relaxed">While the upfront cost is higher than mass-market lines, the inclusion of all dining, gratuities, Wi-Fi, and fitness classes makes the total vacation cost highly competitive.</p>
+                </div>
+            </div>
+        </div>
+      </section>
+
+      <section id="fleet-section" class="py-20 px-8 bg-sand">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-left mb-12">
+                <h2 class="text-4xl font-['Poppins'] font-semibold text-brandPrimary mb-2 tracking-tight">Global Fleet Inventory</h2>
+                <p class="text-slate text-xs tracking-widest font-bold uppercase opacity-60">4 Vessels. The "Lady" Ships.</p>
+            </div>
+            
+            <div class="bg-white rounded-[2rem] shadow-premium overflow-hidden border border-brandPrimary/5">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[1000px]">
+                        <thead>
+                            <tr class="bg-brandPrimary text-white uppercase text-[10px] tracking-[0.2em] font-bold">
+                                <th scope="col" class="p-5 px-8 flex items-center gap-4">
+                                    <span class="text-sm">Vessel Identity</span>
+                                    <span class="bg-brandAccent text-white px-3 py-1 rounded-full text-[10px] tracking-widest font-black border border-white/20">Deck Plans</span>
+                                </th>
+                                <th scope="col" class="p-5 px-6">Class Designation</th>
+                                <th scope="col" class="p-5 px-6 text-center">Max Capacity</th>
+                                <th scope="col" class="p-5 px-6 text-right">Commissioned</th>
+                                <th scope="col" class="p-5 px-6 text-right">Deployment</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm font-medium font-['Poppins'] text-slate/80">
+                            
+                            <tr class="bg-mist/50 border-b border-sand">
+                                <td class="p-4 px-8 font-bold text-brandPrimary italic"><a href="https://www.cruisedeckplans.com/ships/Brilliant-Lady" target="_blank" aria-label="View Deck Plans for Brilliant Lady" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Brilliant Lady</span></a></td>
+                                <td>Lady Class</td><td class="text-center">2,770</td><td class="text-right font-bold text-brandPrimary">2024</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Brilliant Lady" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent transition">VIEW SAILINGS</a></td>
+                            </tr>
+
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Resilient-Lady" target="_blank" aria-label="View Deck Plans for Resilient Lady" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Resilient Lady</span></a></td>
+                                <td>Lady Class</td><td class="text-center">2,770</td><td class="text-right">2023</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Resilient Lady" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent transition">VIEW SAILINGS</a></td>
+                            </tr>
+
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Valiant-Lady" target="_blank" aria-label="View Deck Plans for Valiant Lady" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Valiant Lady</span></a></td>
+                                <td>Lady Class</td><td class="text-center">2,770</td><td class="text-right">2022</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Valiant Lady" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent transition">VIEW SAILINGS</a></td>
+                            </tr>
+
+                            <tr class="group hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Scarlet-Lady" target="_blank" aria-label="View Deck Plans for Scarlet Lady" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Scarlet Lady</span></a></td>
+                                <td>Lady Class</td><td class="text-center">2,770</td><td class="text-right">2020</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Scarlet Lady" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-brandAccent transition">VIEW SAILINGS</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      </section>
+
+      <section class="py-20 px-8 bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+            
+            <div>
+                <h2 class="text-4xl font-['Poppins'] font-semibold uppercase mb-8 text-brandPrimary leading-tight">Engineering <span class="text-brandAccent font-light">Profile</span></h2>
+                
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="font-bold text-xl text-brandPrimary mb-2 font-['Poppins']">The Vertical Prow</h3>
+                        <p class="text-slate leading-relaxed text-sm">The Lady Class ships feature a distinctive, nearly vertical grey hull. This isn't just aesthetic; it's a modern take on the "axe bow" concept. This design slices through waves rather than riding over them, improving hydrodynamic efficiency and fuel economy by approximately 5% compared to traditional flared bows.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-xl text-brandPrimary mb-2 font-['Poppins']">Climeon Power Generation</h3>
+                        <p class="text-slate leading-relaxed text-sm">Virgin Voyages was an early adopter of <strong>Climeon</strong> technology. This system converts waste heat from the ship's engines (which is usually vented) into clean electricity. Each ship has six Climeon modules, generating enough power to run the ship's lighting systems purely from recycled heat.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-xl text-brandPrimary mb-2 font-['Poppins']">The "Sea Terrace" Hammock</h3>
+                        <p class="text-slate leading-relaxed text-sm">Every balcony cabin ("Sea Terrace") features a custom-engineered red hammock. While it looks simple, the structural reinforcement required to safely anchor these hammocks into the steel superstructure—while maintaining fire safety codes—was a significant design engineering challenge.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mt-8">
+                    <div class="bg-sand p-4 rounded-lg border-l-4 border-brandAccent">
+                        <span class="block text-[10px] font-bold uppercase text-slate tracking-widest">Gross Tonnage</span>
+                        <span class="font-mono text-brandPrimary font-bold">110,000 GT</span>
+                    </div>
+                    <div class="bg-sand p-4 rounded-lg border-l-4 border-brandAccent">
+                        <span class="block text-[10px] font-bold uppercase text-slate tracking-widest">Environment</span>
+                        <span class="font-mono text-brandPrimary font-bold">Carbon Neutral (Net Zero Goal)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-brandPrimary text-white p-10 rounded-3xl shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-8 opacity-10">
+                    <svg width="200" height="200" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                </div>
+                <h3 class="text-2xl font-bold font-['Poppins'] uppercase mb-6 tracking-widest text-brandAccent">Operational Data</h3>
+                <ul class="space-y-6 font-mono text-sm">
+                    <li class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-60">Service Speed</span>
+                        <span>20.0 Knots</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-60">Draft</span>
+                        <span>8.0 Meters</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-60">Propulsion</span>
+                        <span>Diesel-Electric (Scrubbers)</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-60">Guest Density</span>
+                        <span>Medium (Space Ratio 39)</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-60">Registry</span>
+                        <span>Bahamas</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-60">Crew to Guest</span>
+                        <span>1 : 2.3 (High Service)</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+      </section>
+
+      <section id="deployment-cta" class="py-24 px-8 text-center bg-white border-t border-sand">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-['Poppins'] font-semibold mb-6 text-brandPrimary uppercase tracking-tight">Ready to Deploy?</h2>
+            
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 bg-sand p-6 rounded-[2.5rem] shadow-lg max-w-3xl mx-auto">
+                <label for="ship-select" class="sr-only">Select a Virgin Ship</label>
+                <select id="ship-select" class="flex-1 w-full p-5 rounded-2xl font-bold text-brandPrimary bg-white border-2 border-transparent focus:border-brandAccent focus:ring-2 focus:ring-brandAccent transition font-['Poppins'] outline-none">
+                    <option>Scarlet Lady</option><option>Valiant Lady</option><option>Resilient Lady</option><option>Brilliant Lady</option>
+                </select>
+                <a href="YOUR_AFFILIATE_LINK" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Selected Ship" class="bg-brandAccent text-white px-10 py-5 rounded-2xl font-bold uppercase tracking-widest hover:bg-brandPrimary transition transform hover:scale-[1.02] shadow-xl w-full md:w-auto text-center text-xs">VIEW SAILINGS</a>
+            </div>
+        </div>
+      </section>
+
+  </main>
+
+  <footer class="bg-brandPrimary text-white py-12 text-center border-t border-white/10">
+    <div class="max-w-4xl mx-auto px-8">
+        <div class="text-4xl font-['Poppins'] mb-4 tracking-tight">
+            <span class="font-normal text-white/70">Cruise</span><span class="font-medium text-white">Prodigy</span>
+        </div>
+        <p class="text-[11px] text-white/80 mb-4 italic font-medium">Affiliate Disclosure: Some outbound links on this page may earn a commission at no cost to you.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

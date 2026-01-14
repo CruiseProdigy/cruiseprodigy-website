@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cruisey v.5.42 | Standardized Intelligence Hub</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], 'Montserrat': ['Montserrat', 'sans-serif'] },
+                    colors: { 
+                        azure: '#003B5C', coral: '#FF7043', mist: '#E0F7FA', lagoon: '#00838F', sand: '#F5F5F5', slate: '#546E7A', 
+                        carnivalRed: '#D32F2F', royalBlue: '#0055A5', nclAqua: '#00A3E0', princessBlue: '#0072CE', celebrityNavy: '#002859',
+                        mscGold: '#D4AF37', virginRed: '#E10A1D', halGold: '#C5A059', vikingNavy: '#002F6C', cunardRed: '#B22222'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .shadow-premium { box-shadow: 0 2px 4px rgba(0,59,92,0.02), 0 10px 20px rgba(0,59,92,0.04), 0 20px 40px rgba(0,59,92,0.04); }
+        .card-3d { transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); transform-style: preserve-3d; }
+        .card-3d:hover { transform: translateY(-12px) scale(1.03); }
+        .pulse-red { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+        .bg-glass-premium { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px) saturate(160%); border-bottom: 1px solid rgba(0,59,92,0.05); }
+        .weather-art { position: absolute; top: 0; right: 0; width: 100%; height: 100%; opacity: 0.08; pointer-events: none; z-index: 0; }
+        .sticky-ribbon { position: sticky; top: 0; z-index: 50; }
+        .tab-content { transition: opacity 0.4s ease, transform 0.4s ease; }
+        @keyframes slideFadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .active-tab-grid { display: grid !important; animation: slideFadeIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
+    </style>
+</head>
+<body class="bg-sand font-sans text-azure selection:bg-coral selection:text-white antialiased">
+
+  <nav class="hidden md:flex items-center justify-between px-16 py-8 bg-glass-premium w-full fixed top-0 z-[100] shadow-sm">
+    <a href="index.html" class="flex items-baseline space-x-4 group">
+      <span class="text-4xl font-black tracking-tighter text-azure font-['Montserrat'] uppercase">Cruisey</span>
+      <span class="text-sm italic font-bold text-slate tracking-tight opacity-70">Eat. Sleep. Cruise. Repeat.</span>
+    </a>
+    <div class="flex space-x-14 text-azure font-bold text-sm uppercase tracking-[0.2em]">
+      <a href="#vibe-explorer" class="hover:text-coral transition-colors">Explorer</a>
+      <a href="#fleet-intelligence" class="hover:text-coral transition-colors">Fleet</a>
+      <a href="#mission-essentials" class="hover:text-coral transition-colors">Essentials</a>
+    </div>
+    <button class="bg-azure text-white px-10 py-3.5 rounded-full font-black text-xs uppercase tracking-widest shadow-xl hover:bg-coral transition-all transform hover:scale-105">Join Community</button>
+  </nav>
+
+  <header class="relative flex flex-col items-center justify-center px-4 pt-48 pb-32 text-center overflow-hidden bg-white">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-mist rounded-full blur-[120px] -z-10 opacity-40"></div>
+    <h1 class="text-6xl md:text-8xl font-black text-azure mb-12 font-['Montserrat'] tracking-tighter leading-[0.9]">Find Your <br><span class="text-lagoon">Perfect Voyage.</span></h1>
+    <div class="w-full max-w-3xl bg-white p-3 rounded-full shadow-premium flex flex-col md:flex-row items-center border border-gray-50 relative z-10">
+        <input type="text" id="hero-search-input" placeholder="Enter Destination or Ship..." class="flex-1 w-full px-10 py-5 text-xl outline-none rounded-full font-medium placeholder:text-slate/40" />
+        <button onclick="document.getElementById('weather-ribbon').scrollIntoView({behavior: 'smooth'})" class="w-full md:w-auto bg-azure text-white px-12 py-5 rounded-full font-black text-sm shadow-lg hover:bg-coral transition-all uppercase tracking-[0.2em]">Initiate Search</button>
+    </div>
+  </header>
+
+  <section id="weather-ribbon" class="sticky-ribbon py-5 px-10 bg-azure text-white shadow-2xl mt-[-1px]">
+    <div id="weather-art-bg" class="weather-art"></div>
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10">
+        <div onclick="openWeatherDeepLink()" class="flex items-center space-x-8 cursor-pointer p-2 rounded-2xl hover:bg-white/5 transition-all group">
+            <div>
+                <div class="flex items-center space-x-3 mb-1.5">
+                    <span class="w-2 h-2 bg-coral rounded-full pulse-red"></span>
+                    <span class="text-[10px] font-black uppercase tracking-[0.3em] text-mist/60 group-hover:text-white transition-colors">Maritime Intel Hub</span>
+                </div>
+                <h2 id="hub-city" class="text-3xl font-black font-['Montserrat'] tracking-tighter leading-none uppercase">Locating...</h2>
+            </div>
+            <div class="flex items-center space-x-6 border-l border-white/10 pl-8">
+                <span id="temp-val" class="text-5xl font-black font-['Montserrat']">--°</span>
+                <div class="hidden sm:block">
+                    <p id="condition-text" class="text-[10px] font-black uppercase tracking-widest text-mist">Syncing Data...</p>
+                    <div class="flex space-x-4 mt-1">
+                        <p class="text-[10px] font-bold text-white/30 italic">WIND: <span id="wind-val" class="text-white not-italic">--</span></p>
+                        <p class="text-[10px] font-bold text-white/30 italic">UV: <span id="uv-val" class="text-white not-italic">--</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="forecast-container" class="flex items-center space-x-8 overflow-x-auto no-scrollbar border-l border-white/10 pl-8 w-full lg:w-auto py-2">
+            <div class="text-center min-w-[60px]"><p id="f1-date" class="text-[10px] font-black opacity-30 uppercase tracking-widest mb-1">--</p><div id="f1-icon" class="text-xl">⏳</div><p class="text-sm font-black mt-1"><span id="f1-high">--</span>°</p></div>
+            <div class="text-center min-w-[60px]"><p id="f2-date" class="text-[10px] font-black opacity-30 uppercase tracking-widest mb-1">--</p><div id="f2-icon" class="text-xl">⏳</div><p class="text-sm font-black mt-1"><span id="f2-high">--</span>°</p></div>
+            <div class="text-center min-w-[60px]"><p id="f3-date" class="text-[10px] font-black opacity-30 uppercase tracking-widest mb-1">--</p><div id="f3-icon" class="text-xl">⏳</div><p class="text-sm font-black mt-1"><span id="f3-high">--</span>°</p></div>
+            <div class="text-center min-w-[60px]"><p id="f4-date" class="text-[10px] font-black opacity-30 uppercase tracking-widest mb-1">--</p><div id="f4-icon" class="text-xl">⏳</div><p class="text-sm font-black mt-1"><span id="f4-high">--</span>°</p></div>
+            <div class="text-center min-w-[60px]"><p id="f5-date" class="text-[10px] font-black opacity-30 uppercase tracking-widest mb-1">--</p><div id="f5-icon" class="text-xl">⏳</div><p class="text-sm font-black mt-1"><span id="f5-high">--</span>°</p></div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="relative">
+                <input id="port-search" type="text" placeholder="Scan Port Intel..." class="bg-white/10 text-white placeholder-white/30 rounded-xl px-5 py-3 text-xs font-bold outline-none w-64 border border-white/10 focus:bg-white focus:text-azure transition-all">
+                <button onclick="fetchByPort()" class="absolute right-2 top-2 bg-coral text-white p-2 rounded-lg hover:bg-white hover:text-azure transition-colors"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></button>
+            </div>
+            <button onclick="fetchByGPS()" class="text-[10px] font-black uppercase tracking-[0.2em] bg-white/5 px-5 py-3 rounded-xl border border-white/10 hover:bg-white/20 transition-all">GPS</button>
+        </div>
+    </div>
+  </section>
+
+  <section id="vibe-explorer" class="py-32 px-10 bg-mist/30">
+    <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col lg:flex-row items-end justify-between mb-16 gap-8">
+            <div>
+                <h2 class="text-5xl font-black text-azure font-['Montserrat'] tracking-tighter uppercase mb-3 leading-none">Vibe Explorer</h2>
+                <p id="deck-label" class="text-[10px] font-black text-lagoon uppercase tracking-[0.5em] opacity-60">Active Deck: Destinations</p>
+            </div>
+            <div class="flex bg-white/50 p-2 rounded-3xl shadow-premium border border-white/40">
+                <button onclick="switchTab('destinations')" id="btn-destinations" class="px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all bg-azure text-white shadow-xl">Destinations</button>
+                <button onclick="switchTab('ships')" id="btn-ships" class="px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all text-azure/50 hover:text-azure">Ships</button>
+                <button onclick="switchTab('travelers')" id="btn-travelers" class="px-10 py-4 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all text-azure/50 hover:text-azure">Travelers</button>
+            </div>
+        </div>
+        <div id="tab-destinations" class="tab-content grid grid-cols-1 md:grid-cols-3 gap-12 active-tab-grid">
+            <a href="dest-caribbean.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all">
+                <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&w=1200&q=95" alt="Caribbean" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                <span class="absolute bottom-10 left-10 text-white font-black text-3xl uppercase font-['Montserrat'] tracking-tighter">Caribbean</span>
+            </a>
+            <a href="dest-mediterranean.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all">
+                <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=95" alt="Mediterranean" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                <span class="absolute bottom-10 left-10 text-white font-black text-3xl uppercase font-['Montserrat'] tracking-tighter">Mediterranean</span>
+            </a>
+            <a href="dest-europe.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all">
+                <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1200&q=95" alt="Europe" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                <span class="absolute bottom-10 left-10 text-white font-black text-3xl uppercase font-['Montserrat'] tracking-tighter">Europe</span>
+            </a>
+            <a href="dest-alaska.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all">
+                <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1200&q=95" alt="Alaska" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                <span class="absolute bottom-10 left-10 text-white font-black text-3xl uppercase font-['Montserrat'] tracking-tighter">Alaska</span>
+            </a>
+            <a href="dest-asia-pacific.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all">
+                <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=95" alt="Asia & Pacific" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                <span class="absolute bottom-10 left-10 text-white font-black text-3xl uppercase font-['Montserrat'] tracking-tighter">Asia & Pacific</span>
+            </a>
+            <a href="dest-directory.html" class="group relative aspect-video rounded-[2.5rem] border-2 border-dashed border-azure/20 flex items-center justify-center hover:bg-azure hover:border-azure transition-all shadow-md">
+                <span class="text-azure font-black text-2xl group-hover:text-white uppercase font-['Montserrat'] tracking-[0.3em] text-center px-8">All Sectors</span>
+            </a>
+        </div>
+        <div id="tab-ships" class="tab-content hidden grid-cols-1 md:grid-cols-3 gap-12">
+            <a href="ship-family.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all">
+                <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=95" alt="Family" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
+                <div class="absolute inset-0 bg-black/30"></div>
+                <span class="absolute bottom-10 left-10 text-white font-black text-3xl uppercase font-['Montserrat'] tracking-tighter">Family & Kids</span>
+            </a>
+            <a href="ship-luxury.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all">
+                <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?auto=format&fit=crop&w=1200&q=95" alt="Luxury" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
+                <div class="absolute inset-0 bg-black/30"></div>
+                <span class="absolute bottom-10 left-10 text-white font-black text-3xl uppercase font-['Montserrat'] tracking-tighter">Luxury & Small Ships</span>
+            </a>
+            <a href="ship-mega.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all">
+                <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&w=1200&q=95" alt="Mega" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
+                <div class="absolute inset-0 bg-black/30"></div>
+                <span class="absolute bottom-10 left-10 text-white font-black text-3xl uppercase font-['Montserrat'] tracking-tighter">Mega-Ships</span>
+            </a>
+            <a href="ship-adults.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all">
+                <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=1200&q=95" alt="Adults" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
+                <div class="absolute inset-0 bg-black/30"></div>
+                <span class="absolute bottom-10 left-10 text-white font-black text-3xl uppercase font-['Montserrat'] tracking-tighter">Adults-Only</span>
+            </a>
+            <a href="ship-traditional.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all">
+                <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1200&q=95" alt="Classic" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
+                <div class="absolute inset-0 bg-black/30"></div>
+                <span class="absolute bottom-10 left-10 text-white font-black text-3xl uppercase font-['Montserrat'] tracking-tighter">Classic & Traditional</span>
+            </a>
+            <a href="ship-category-directory.html" class="group relative aspect-video rounded-[2.5rem] border-2 border-dashed border-azure/20 flex items-center justify-center hover:bg-azure hover:border-azure transition-all shadow-md">
+                <span class="text-azure font-black text-2xl group-hover:text-white uppercase font-['Montserrat'] tracking-[0.3em] text-center px-8">More Ship Vibes</span>
+            </a>
+        </div>
+        <div id="tab-travelers" class="tab-content hidden grid-cols-1 md:grid-cols-3 gap-12">
+            <a href="trav-family.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all">
+                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=1200&q=95" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
+                <div class="absolute inset-0 bg-black/30"></div>
+                <span class="absolute bottom-10 left-10 text-white font-black text-3xl uppercase font-['Montserrat'] tracking-tighter">Families</span>
+            </a>
+            <a href="trav-couples.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all">
+                <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=1200&q=95" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
+                <div class="absolute inset-0 bg-black/30"></div>
+                <span class="absolute bottom-10 left-10 text-white font-black text-3xl uppercase font-['Montserrat'] tracking-tighter">Couples</span>
+            </a>
+            <a href="trav-solo.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all">
+                <img src="https://images.unsplash.com/photo-1501555088652-021faa106b9b?auto=format&fit=crop&w=1200&q=95" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
+                <div class="absolute inset-0 bg-black/30"></div>
+                <span class="absolute bottom-10 left-10 text-white font-black text-3xl uppercase font-['Montserrat'] tracking-tighter">Solo Travelers</span>
+            </a>
+            <a href="trav-high-rollers.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all">
+                <img src="https://images.unsplash.com/photo-1511193311914-0346f16efe90?auto=format&fit=crop&w=1200&q=95" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
+                <div class="absolute inset-0 bg-black/40"></div>
+                <span class="absolute bottom-10 left-10 text-white font-black text-3xl uppercase font-['Montserrat'] tracking-tighter">High Rollers</span>
+            </a>
+            <a href="trav-adventurers.html" class="group relative aspect-video rounded-[2.5rem] overflow-hidden shadow-premium hover:-translate-y-3 transition-all">
+                <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1200&q=95" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 duration-700">
+                <div class="absolute inset-0 bg-black/30"></div>
+                <span class="absolute bottom-10 left-10 text-white font-black text-3xl uppercase font-['Montserrat'] tracking-tighter">Adventurers</span>
+            </a>
+            <a href="trav-directory.html" class="group relative aspect-video rounded-[2.5rem] border-2 border-dashed border-azure/20 flex items-center justify-center hover:bg-azure hover:border-azure transition-all shadow-md">
+                <span class="text-azure font-black text-2xl group-hover:text-white uppercase font-['Montserrat'] tracking-[0.3em] text-center px-8">More Traveler Vibes</span>
+            </a>
+        </div>
+    </div>
+  </section>
+
+  <section id="fleet-intelligence" class="py-40 bg-white overflow-hidden select-none">
+    <div class="max-w-7xl mx-auto px-10 mb-20 flex justify-between items-end">
+        <div>
+            <h2 class="text-5xl font-black text-azure font-['Montserrat'] uppercase tracking-tighter leading-none mb-4">Fleet Intelligence</h2>
+            <p class="text-xs font-bold text-slate uppercase tracking-[0.4em] opacity-40">Tactical Asset Deployment</p>
+        </div>
+        <div class="hidden md:flex space-x-6">
+            <button onclick="scrollFleet(-1)" class="bg-sand hover:bg-azure hover:text-white text-azure w-14 h-14 rounded-full flex items-center justify-center transition shadow-premium border border-gray-100"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg></button>
+            <button onclick="scrollFleet(1)" class="bg-sand hover:bg-azure hover:text-white text-azure w-14 h-14 rounded-full flex items-center justify-center transition shadow-premium border border-gray-100"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+    </div>
+    <div id="slider" class="flex overflow-x-auto pb-24 space-x-12 px-10 no-scrollbar cursor-grab md:justify-start">
+        <a href="line-disney.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-56 bg-white rounded-[2.5rem] shadow-premium flex flex-col items-center justify-center p-10 border border-gray-50 text-center">
+                <svg class="w-12 h-12 mb-6 text-azure" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.03 2 3 6.03 3 11c0 3.1 1.58 5.84 4 7.42V22l4-2 4 2v-3.58c2.42-1.58 4-4.32 4-7.42 0-4.97-4.03-9-9-9z"/></svg>
+                <span class="font-black text-azure text-2xl font-['Montserrat'] tracking-tighter uppercase">Disney Cruise</span>
+            </div>
+        </a>
+        <a href="line-royal.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-56 bg-white rounded-[2.5rem] shadow-premium flex flex-col items-center justify-center p-10 border border-gray-50 text-center">
+                <svg class="w-12 h-12 mb-6 text-royalBlue" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>
+                <span class="font-black text-royalBlue text-2xl font-['Montserrat'] tracking-tighter uppercase">Royal Caribbean</span>
+            </div>
+        </a>
+        <a href="line-carnival.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-56 bg-white rounded-[2.5rem] shadow-premium flex flex-col items-center justify-center p-10 border border-gray-50 text-center">
+                <svg class="w-12 h-12 mb-6 text-carnivalRed" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L4 12h16L12 2zm0 18l-8-8h16l-8 8z"/></svg>
+                <span class="font-black text-carnivalRed text-2xl font-['Montserrat'] tracking-tighter uppercase">Carnival</span>
+            </div>
+        </a>
+        <a href="line-norwegian.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-56 bg-white rounded-[2.5rem] shadow-premium flex flex-col items-center justify-center p-10 border border-gray-50 text-center">
+                <svg class="w-12 h-12 mb-6 text-nclAqua" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-3zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>
+                <span class="font-black text-nclAqua text-2xl font-['Montserrat'] tracking-tighter uppercase">Norwegian</span>
+            </div>
+        </a>
+        <a href="line-princess.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-56 bg-white rounded-[2.5rem] shadow-premium flex flex-col items-center justify-center p-10 border border-gray-50 text-center">
+                <svg class="w-12 h-12 mb-6 text-princessBlue" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4c-4.42 0-8 3.58-8 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
+                <span class="font-black text-princessBlue text-2xl font-['Montserrat'] tracking-tighter uppercase">Princess</span>
+            </div>
+        </a>
+        <a href="line-celebrity.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-56 bg-white rounded-[2.5rem] shadow-premium flex flex-col items-center justify-center p-10 border border-gray-50 text-center">
+                <svg class="w-12 h-12 mb-6 text-celebrityNavy" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                <span class="font-black text-celebrityNavy text-2xl font-['Montserrat'] tracking-tighter uppercase">Celebrity</span>
+            </div>
+        </a>
+        <a href="line-msc.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-56 bg-white rounded-[2.5rem] shadow-premium flex flex-col items-center justify-center p-10 border border-gray-50 text-center">
+                <svg class="w-12 h-12 mb-6 text-mscGold" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/></svg>
+                <span class="font-black text-mscGold text-2xl font-['Montserrat'] tracking-tighter uppercase">MSC Cruises</span>
+            </div>
+        </a>
+        <a href="line-virgin.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-56 bg-white rounded-[2.5rem] shadow-premium flex flex-col items-center justify-center p-10 border border-gray-50 text-center">
+                <svg class="w-12 h-12 mb-6 text-virginRed" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <span class="font-black text-virginRed text-2xl font-['Montserrat'] tracking-tighter uppercase">Virgin Voyages</span>
+            </div>
+        </a>
+        <a href="line-holland.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-56 bg-white rounded-[2.5rem] shadow-premium flex flex-col items-center justify-center p-10 border border-gray-50 text-center">
+                <svg class="w-12 h-12 mb-6 text-halGold" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10-10-4.48-10-10 4.48-10 10-10zm0 18c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8zm-1-13h2v10h-2V7z"/></svg>
+                <span class="font-black text-halGold text-2xl font-['Montserrat'] tracking-tighter uppercase">Holland America</span>
+            </div>
+        </a>
+        <a href="line-viking.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-56 bg-white rounded-[2.5rem] shadow-premium flex flex-col items-center justify-center p-10 border border-gray-50 text-center">
+                <svg class="w-12 h-12 mb-6 text-vikingNavy" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+                <span class="font-black text-vikingNavy text-2xl font-['Montserrat'] tracking-tighter uppercase">Viking</span>
+            </div>
+        </a>
+        <a href="line-cunard.html" target="_blank" rel="sponsored noopener" class="flex-shrink-0 card-3d">
+            <div class="w-80 h-56 bg-white rounded-[2.5rem] shadow-premium flex flex-col items-center justify-center p-10 border border-gray-50 text-center">
+                <svg class="w-12 h-12 mb-6 text-cunardRed" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                <span class="font-black text-cunardRed text-2xl font-['Montserrat'] tracking-tighter uppercase">Cunard</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-10 grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-gray-100 pt-16">
+        <div class="bg-sand/40 rounded-[2rem] p-8 flex items-center justify-between group hover:bg-white hover:shadow-premium transition-all">
+            <div class="flex-1">
+                <h4 class="text-xs font-black text-lagoon uppercase tracking-[0.3em] mb-2">Port Intelligence</h4>
+                <p class="text-xl font-black font-['Montserrat'] uppercase tracking-tight mb-1">Port Guides</p>
+                <p class="text-[10px] text-slate font-bold uppercase opacity-50 leading-relaxed">Essential destination maps, local tips, <br>and docking information.</p>
+            </div>
+            <a href="port-guides-hub.html" class="bg-azure text-white px-8 py-4 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-coral transition-all">Explore Guides</a>
+        </div>
+        <div class="bg-sand/40 rounded-[2rem] p-8 flex items-center justify-between group hover:bg-white hover:shadow-premium transition-all">
+            <div class="flex-1">
+                <h4 class="text-xs font-black text-azure uppercase tracking-[0.3em] mb-2">Adventure Intel</h4>
+                <p class="text-xl font-black font-['Montserrat'] uppercase tracking-tight mb-1">Shore Excursions</p>
+                <p class="text-[10px] text-slate font-bold uppercase opacity-50 leading-relaxed">Verified local operators, activity logs, <br>and excursion data.</p>
+            </div>
+            <a href="shore-excursions-hub.html" class="bg-azure text-white px-8 py-4 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-coral transition-all">Find Tours</a>
+        </div>
+        <div class="bg-sand/40 rounded-[2rem] p-8 flex items-center justify-between group hover:bg-white hover:shadow-premium transition-all">
+            <div class="flex-1">
+                <div class="flex items-center space-x-2 mb-2">
+                    <span class="w-2 h-2 bg-coral rounded-full pulse-red"></span>
+                    <h4 class="text-xs font-black text-coral uppercase tracking-[0.3em]">Live Feed</h4>
+                </div>
+                <p class="text-xl font-black font-['Montserrat'] uppercase tracking-tight mb-1">Cruise News</p>
+                <p class="text-[10px] text-slate font-bold uppercase opacity-50 leading-relaxed">Real-time alerts on weather, travel <br>disruptions, and industry trends.</p>
+            </div>
+            <a href="cruise-news-hub.html" class="bg-azure text-white px-8 py-4 rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-coral transition-all">Read Alerts</a>
+        </div>
+    </div>
+  </section>
+
+  <section id="field-reports" class="py-40 bg-azure text-white relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+    <div class="max-w-7xl mx-auto px-10 relative z-10"> 
+        <div class="mb-20">
+            <h2 class="text-5xl font-black text-white font-['Montserrat'] uppercase tracking-tighter leading-none mb-4">Field Reports</h2>
+            <p class="text-xs font-bold text-white uppercase tracking-[0.4em] opacity-40">Real Reviews. Trusted Voices.</p>
+        </div>
+        
+        <div class="text-center max-w-4xl mx-auto mb-20">
+            <h3 class="text-2xl md:text-3xl font-bold font-['Montserrat'] italic leading-relaxed">
+                &ldquo;We believe every voice matters, <br>
+                <span class="text-lagoon">but we give the crown to those who were there.&rdquo;</span>
+            </h3>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20 text-left">
+            <div class="flex flex-col items-start">
+                <div class="w-16 h-16 bg-coral rounded-2xl flex items-center justify-center mb-8 shadow-lg">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </div>
+                <h4 class="text-2xl font-black font-['Montserrat'] mb-4"><span class="text-coral">"Elite"</span> Verified Status</h4>
+                <p class="text-white/70 text-sm leading-relaxed font-medium">The Gold Standard. Simply upload a photo from the ship to earn the <strong class="text-white">Elite Badge</strong>. Our system uses GPS and timestamps to verify your presence instantly.</p>
+            </div>
+            <div class="flex flex-col items-start">
+                <div class="w-16 h-16 bg-lagoon rounded-2xl flex items-center justify-center mb-8 shadow-lg">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                </div>
+                <h4 class="text-2xl font-black font-['Montserrat'] mb-4">Zero-Friction Community</h4>
+                <p class="text-white/70 text-sm leading-relaxed font-medium">Every cruiser has a story. Our <strong class="text-white">Community Reviews</strong> allow for quick, easy sharing without the paperwork. Great for volume; honest by design.</p>
+            </div>
+            <div class="flex flex-col items-start">
+                <div class="w-16 h-16 bg-lagoon rounded-2xl flex items-center justify-center mb-8 shadow-lg">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z"/></svg>
+                </div>
+                <h4 class="text-2xl font-black font-['Montserrat'] mb-4">The Weighted Leaderboard</h4>
+                <p class="text-white/70 text-sm leading-relaxed font-medium">Not all stars are equal. Our ranking algorithm gives more weight to <strong class="text-white">Elite Reviews</strong>, ensuring the Ship Leaderboard reflects reality, not rumors.</p>
+            </div>
+        </div>
+        <div class="text-center">
+            <a href="#" class="inline-block bg-coral text-white px-12 py-5 rounded-full font-black text-xs uppercase tracking-widest shadow-xl hover:bg-white hover:text-coral transition-all transform hover:scale-105">Explore Elite Rankings</a>
+        </div>
+    </div>
+  </section>
+
+  <section id="mission-essentials" class="py-40 px-10 bg-sand">
+    <div class="max-w-7xl mx-auto mb-24 text-center">
+        <h2 class="text-5xl font-black text-azure font-['Montserrat'] mb-4 uppercase tracking-[0.2em]">Mission Essentials</h2>
+        <p class="text-azure/60 text-xs italic font-medium mb-12">Affiliate Disclosure: Gear recommendations are mission-verified. Links may earn a commission at no cost to you. </p>
+        <p class="text-slate font-bold uppercase tracking-[0.3em] opacity-40 text-[10px]">Standard Issue Cabin Augmentation</p>
+    </div>
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 mb-24">
+      <div class="bg-white rounded-[3rem] p-12 shadow-premium flex flex-col h-full hover:shadow-2xl transition-all border border-gray-50">
+          <div class="h-80 bg-gray-100 rounded-[2rem] mb-10 overflow-hidden"><img src="https://images.unsplash.com/photo-1585338665768-3c070c792138?auto=format&fit=crop&w=1200&q=95" class="w-full h-full object-cover" alt="Hooks"></div>
+          <h3 class="text-3xl font-black text-azure mb-4 uppercase font-['Montserrat'] tracking-tighter leading-none">Magnetic Hooks</h3>
+          <p class="text-slate/60 text-sm font-medium mb-8 leading-relaxed">Maximize cabin square footage by utilizing vertical steel surfaces. Critical for high-density storage management.</p>
+          <a href="#" target="_blank" rel="sponsored noopener" class="mt-auto w-full border-[3px] border-azure text-azure text-center font-black py-5 rounded-2xl hover:bg-azure hover:text-white transition uppercase text-xs tracking-[0.3em]">Mission-Approved</a>
+      </div>
+      <div class="bg-white rounded-[3rem] p-12 shadow-premium flex flex-col h-full hover:shadow-2xl transition-all border border-gray-50">
+          <div class="h-80 bg-gray-100 rounded-[2rem] mb-10 overflow-hidden"><img src="https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&w=1200&q=95" alt="Power"></div>
+          <h3 class="text-3xl font-black text-azure mb-4 uppercase font-['Montserrat'] tracking-tighter leading-none">Power Cell</h3>
+          <p class="text-slate/60 text-sm font-medium mb-8 leading-relaxed">Ensure mission-critical uptime for mobile hardware during extended shore deployments. High-capacity rapid-sync capability.</p>
+          <a href="#" target="_blank" rel="sponsored noopener" class="mt-auto w-full border-[3px] border-azure text-azure text-center font-black py-5 rounded-2xl hover:bg-azure hover:text-white transition uppercase text-xs tracking-[0.3em]">Mission-Approved</a>
+      </div>
+      <div class="bg-white rounded-[3rem] p-12 shadow-premium flex flex-col h-full hover:shadow-2xl transition-all border border-gray-50">
+          <div class="h-80 bg-gray-100 rounded-[2rem] mb-10 overflow-hidden"><img src="https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?auto=format&fit=crop&w=1200&q=95" alt="Ducks"></div>
+          <h3 class="text-3xl font-black text-azure mb-4 uppercase font-['Montserrat'] tracking-tighter leading-none">Cruising Ducks</h3>
+          <p class="text-slate/60 text-sm font-medium mb-8 leading-relaxed">Standard issue identifiers for maritime community engagement and psychological operations on multi-deck environments.</p>
+          <a href="#" target="_blank" rel="sponsored noopener" class="mt-auto w-full border-[3px] border-azure text-azure text-center font-black py-5 rounded-2xl hover:bg-azure hover:text-white transition uppercase text-xs tracking-[0.3em]">Mission-Approved</a>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto">
+        <div class="bg-azure rounded-[4rem] p-16 shadow-premium flex flex-col md:flex-row items-center gap-16 border border-white/5 overflow-hidden relative">
+            <div class="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+            <div class="w-full md:w-1/2 aspect-square md:aspect-video rounded-[3rem] overflow-hidden shadow-2xl relative z-10">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=95" class="w-full h-full object-cover" alt="Tactical Kit">
+            </div>
+            <div class="w-full md:w-1/2 relative z-10">
+                <div class="inline-block bg-coral text-white px-6 py-2 rounded-full font-black text-[10px] uppercase tracking-widest mb-6">High Impact Deployment</div>
+                <h3 class="text-5xl font-black text-white mb-6 uppercase font-['Montserrat'] tracking-tighter leading-none">First-Time <br>Cruiser Kit</h3>
+                <p class="text-white/60 text-lg font-medium mb-10 leading-relaxed">The definitive checklist for initial deployments. This loadout solves common friction points including power regulation, storage, and organizational logistics.</p>
+                <a href="#" target="_blank" rel="sponsored noopener" class="inline-block bg-white text-azure text-center font-black px-14 py-6 rounded-2xl hover:bg-coral hover:text-white transition-all uppercase text-xs tracking-[0.4em] shadow-xl">Kit Loadout</a>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  <footer class="bg-azure text-white pt-24 pb-16 text-center">
+    <div class="max-w-7xl mx-auto px-10 flex flex-col items-center">
+        <span class="text-6xl font-black font-['Montserrat'] mb-6 tracking-tighter uppercase">Cruisey</span>
+        <p class="text-sm italic font-medium text-white/70 mb-12">Affiliate Disclosure: Outbound links on this page may earn a commission at no cost to you.</p>
+        <p class="text-[10px] opacity-20 uppercase tracking-[0.5em]">© 2026 Cruisey Interactive Maritime Intel</p>
+    </div>
+  </footer>
+
+  <script>
+    const API_KEY = '63db0fe991cd41d4ae0195810260401';
+    let currentLocationName = "Miami"; 
+    function switchTab(tabId) {
+        ['destinations', 'ships', 'travelers'].forEach(id => {
+            const btn = document.getElementById('btn-' + id);
+            const content = document.getElementById('tab-' + id);
+            if(btn && content) {
+                btn.className = "px-10 py-4 rounded-2xl font-black text-xs text-azure/50 hover:text-azure transition-all uppercase tracking-[0.2em]";
+                content.classList.add('hidden');
+                content.classList.remove('active-tab-grid');
+            }
+        });
+        const activeBtn = document.getElementById('btn-' + tabId);
+        const activeContent = document.getElementById('tab-' + tabId);
+        if(activeBtn && activeContent) {
+            activeBtn.className = "px-10 py-4 rounded-2xl font-black text-xs bg-azure text-white shadow-xl uppercase tracking-[0.2em] transition-all";
+            activeContent.classList.remove('hidden');
+            activeContent.classList.add('active-tab-grid');
+            document.getElementById('deck-label').innerText = `Active Deck: ${tabId.charAt(0).toUpperCase() + tabId.slice(1)}`;
+        }
+    }
+    async function updateUI(location) {
+        try {
+            const res = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=5`);
+            const d = await res.json();
+            currentLocationName = d.location.name;
+            document.getElementById('hub-city').innerText = d.location.name.toUpperCase();
+            document.getElementById('temp-val').innerText = `${Math.round(d.current.temp_f)}°`;
+            document.getElementById('condition-text').innerText = d.current.condition.text.toUpperCase();
+            document.getElementById('wind-val').innerText = `${Math.round(d.current.wind_mph)} MPH`;
+            document.getElementById('uv-val').innerText = d.current.uv;
+            const days = d.forecast.forecastday;
+            for(let i=0; i<5; i++) {
+                const day = days[i];
+                const dateEl = document.getElementById(`f${i+1}-date`);
+                const iconEl = document.getElementById(`f${i+1}-icon`);
+                const highEl = document.getElementById(`f${i+1}-high`);
+                if(dateEl && iconEl && highEl) {
+                    dateEl.innerText = i === 0 ? "Today" : new Date(day.date + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'short' });
+                    highEl.innerText = Math.round(day.day.maxtemp_f);
+                    const c = day.day.condition.text.toLowerCase();
+                    iconEl.innerText = c.includes('sun') || c.includes('clear') ? '☀️' : (c.includes('rain') ? '🌧️' : '☁️');
+                }
+            }
+        } catch (err) { console.error(err); updateUI('Miami'); }
+    }
+    function fetchByPort() { const q = document.getElementById('port-search').value; if (q) updateUI(q); }
+    function fetchByGPS() { if (navigator.geolocation) { navigator.geolocation.getCurrentPosition((p) => { updateUI(`${p.coords.latitude},${p.coords.longitude}`); }); } }
+    function openWeatherDeepLink() { window.open(`https://www.google.com/search?q=weather+${encodeURIComponent(currentLocationName)}`, '_blank'); }
+    function scrollFleet(dir) {
+        const s = document.getElementById('slider');
+        const scrollAmount = 368; 
+        s.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+    }
+    const slider = document.getElementById('slider');
+    let isDown = false, startX, scrollLeft;
+    slider.addEventListener('mousedown', (e) => { isDown = true; startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; });
+    slider.addEventListener('mouseleave', () => { isDown = false; });
+    slider.addEventListener('mouseup', () => { isDown = false; });
+    slider.addEventListener('mousemove', (e) => { if (!isDown) return; e.preventDefault(); const x = (e.pageX - slider.offsetLeft - startX) * 2; slider.scrollLeft = scrollLeft - x; });
+    window.onload = () => { updateUI('auto:ip'); };
+  </script>
+</body>
+</html>

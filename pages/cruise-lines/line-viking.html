@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viking Ocean Cruises | Fleet Intelligence Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'], 
+                        'Montserrat': ['Montserrat', 'sans-serif'],
+                        'Poppins': ['Poppins', 'sans-serif'] 
+                    },
+                    colors: { 
+                        azure: '#003B5C', 
+                        lagoon: '#00838F',
+                        coral: '#FF7043',
+                        sand: '#F5F5F5', 
+                        slate: '#546E7A',
+                        mist: '#E0F7FA',
+                        brandPrimary: '#002F6C', 
+                        brandAccent: '#717175',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .shadow-premium { box-shadow: 0 2px 4px rgba(0,59,92,0.02), 0 10px 20px rgba(0,59,92,0.04), 0 20px 40px rgba(0,59,92,0.04); }
+        *:focus-visible { outline: 2px solid #FF7043; outline-offset: 2px; }
+    </style>
+</head>
+<body class="bg-sand text-azure font-sans selection:bg-brandPrimary selection:text-white antialiased">
+
+  <a href="#main-content" class="absolute top-0 left-0 bg-coral text-white p-3 z-[110] -translate-y-full focus:translate-y-0 transition-transform font-bold shadow-xl rounded-br-lg">Skip to Main Content</a>
+
+  <nav class="hidden lg:block pointer-events-none fixed inset-y-0 w-full z-[100]">
+      <a href="line-holland.html" class="pointer-events-auto fixed left-6 top-1/2 -translate-y-1/2 bg-white text-brandPrimary p-4 rounded-full shadow-2xl border border-gray-100 hover:bg-mist hover:scale-110 transition-all group focus:outline-none focus:ring-4 focus:ring-coral" aria-label="Navigate to Previous Dossier: Holland America">
+          <span class="absolute left-full ml-4 top-1/2 -translate-y-1/2 px-4 py-2 bg-brandPrimary text-white text-xs font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-lg tracking-widest uppercase">Prev: Holland America</span>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      </a>
+      <a href="line-cunard.html" class="pointer-events-auto fixed right-6 top-1/2 -translate-y-1/2 bg-white text-brandPrimary p-4 rounded-full shadow-2xl border border-gray-100 hover:bg-mist hover:scale-110 transition-all group focus:outline-none focus:ring-4 focus:ring-coral" aria-label="Navigate to Next Dossier: Cunard">
+          <span class="absolute right-full mr-4 top-1/2 -translate-y-1/2 px-4 py-2 bg-brandPrimary text-white text-xs font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-lg tracking-widest uppercase">Next: Cunard</span>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </a>
+  </nav>
+
+  <nav class="flex items-center justify-between px-6 md:px-12 py-6 bg-white sticky top-0 z-[60] shadow-sm">
+    <a href="index.html" class="flex flex-col items-start group">
+        <div class="text-3xl md:text-4xl font-['Poppins'] tracking-tight leading-none mb-1">
+            <span class="font-normal text-lagoon">Cruise</span><span class="font-medium text-azure">Prodigy</span>
+        </div>
+        <span class="text-[10px] md:text-xs font-semibold text-azure uppercase tracking-[0.2em] text-left ml-1 font-['Poppins']">Cruise Like A Genius.</span>
+    </a>
+    
+    <div class="hidden md:flex space-x-10 text-azure font-semibold text-xs uppercase tracking-[0.2em]">
+      <a href="index.html#vibe-explorer" class="hover:text-lagoon transition-colors">Explorer</a>
+      <a href="index.html#fleet-intelligence" class="hover:text-lagoon transition-colors">Fleet</a>
+      <a href="index.html#mission-essentials" class="hover:text-lagoon transition-colors">Essentials</a>
+    </div>
+    <button class="bg-azure text-white px-8 py-2.5 rounded-full font-bold text-xs uppercase tracking-widest shadow-lg hover:bg-lagoon transition transform hover:scale-105">Join Community</button>
+  </nav>
+
+  <main id="main-content">
+      
+      <header class="bg-brandPrimary py-20 px-8 md:px-12 text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none" aria-hidden="true">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#FFFFFF" d="M42.7,-62.9C50.9,-52.8,50.1,-34.4,51.7,-19.2C53.4,-4,57.4,8,54,17.8C50.6,27.6,39.8,35.2,28.3,46.5C16.8,57.8,4.6,72.8,-10.6,78.9C-25.8,85,-44,82.2,-53.4,70.3C-62.8,58.4,-63.4,37.4,-66.2,18.6C-69,-0.2,-74,-16.8,-68.6,-29.4C-63.2,-42,-47.4,-50.6,-33.2,-58.3C-19,-66,-6.4,-72.8,4.1,-75.2C14.6,-77.6,29.2,-75.6,34.5,-73L42.7,-62.9Z" transform="translate(100 100)" />
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
+            <div>
+                <div class="flex items-center space-x-3 mb-4">
+                    <span class="bg-white/20 text-white px-3 py-1 rounded text-[10px] font-bold uppercase tracking-widest">Fleet Dossier: VIK-09</span>
+                    <span class="w-1 h-1 bg-white rounded-full"></span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-['Poppins'] font-semibold mb-6 tracking-tight leading-none">
+                    Viking <br>
+                    <span class="text-white/60 font-light">Ocean Cruises</span>
+                </h1>
+                
+                <p class="text-lg text-white/80 font-['Poppins'] font-light max-w-lg leading-relaxed">
+                    The thinking person's cruise line. Viking operates on a principle of "radical simplicity," prioritizing cultural enrichment over casinos, photographers, and water parks.
+                </p>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-sm border border-white/20 p-6 rounded-2xl grid grid-cols-2 gap-6 text-sm">
+                <div>
+                    <span class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Fleet Size</span>
+                    <span class="text-xl font-bold font-['Poppins']">13 Vessels</span>
+                </div>
+                <div>
+                    <span class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">HQ Location</span>
+                    <span class="text-xl font-bold font-['Poppins']">Basel, CH</span>
+                </div>
+                <div>
+                    <span class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Design Style</span>
+                    <span class="text-xl font-bold font-['Poppins']">Scandinavian</span>
+                </div>
+                <div>
+                    <span class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Market Segment</span>
+                    <span class="text-xl font-bold font-['Poppins']">Premium / Luxury</span>
+                </div>
+                <div class="col-span-2 pt-4 border-t border-white/10">
+                     <button onclick="document.getElementById('fleet-section').scrollIntoView({behavior: 'smooth'})" class="w-full bg-white text-brandPrimary px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-mist hover:text-brandPrimary transition-colors focus:ring-2 focus:ring-white">Access Fleet Data</button>
+                </div>
+            </div>
+        </div>
+      </header>
+
+      <section class="py-20 px-8 md:px-12 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+            <div>
+                <h2 class="text-4xl font-['Poppins'] font-semibold uppercase mb-8 text-brandPrimary leading-tight">The Mission:<br><span class="text-slate/60 font-light">Quiet Intelligence.</span></h2>
+                
+                <p class="text-slate text-lg leading-relaxed mb-6 font-light">Viking omits typical industry tropes to focus purely on the destination. You will find no casinos, no art auctions, no photographers interrupting your dinner, and absolutely no children under 18. This is a curated environment designed for guests who value conversation and history over spectacle.</p>
+                
+                <p class="text-slate text-lg leading-relaxed mb-6 font-light">The operational philosophy is based on "The Viking Way," which emphasizes cultural immersion. This manifests in resident historians giving university-level lectures, cooking classes focused on regional cuisine, and a shore excursion included in every single port of call. It is a product built for the "curious traveler," not the "tourist."</p>
+
+                <div class="p-6 bg-sand border-l-4 border-brandPrimary rounded-r-xl shadow-inner mt-8">
+                    <span class="block text-xs font-bold uppercase text-brandPrimary mb-2 tracking-widest">Operational Insight</span>
+                    <p class="font-medium text-brandPrimary italic text-lg font-['Poppins']">"The consistency of the Star Class design means frequent guests can navigate any ship in the fleet from the moment they step on board—the layout is identical across 10+ vessels."</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 gap-6 sticky top-32">
+                <div class="bg-mist p-8 rounded-3xl border border-brandPrimary/5 shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold font-['Poppins'] uppercase mb-2 text-brandPrimary">Target: The Intellectual</h3>
+                    <p class="text-slate text-sm leading-relaxed">Guests who attend port talks to learn about the Hanseatic League or the Romanovs. The on-board library is curated by Heywood Hill of London, and the atmosphere is more akin to a floating boutique hotel than a cruise ship.</p>
+                </div>
+                <div class="bg-mist p-8 rounded-3xl border border-brandPrimary/5 shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold font-['Poppins'] uppercase mb-2 text-brandPrimary">Target: The Global Explorer</h3>
+                    <p class="text-slate text-sm leading-relaxed">For those venturing further, the Polar Class ships utilize a unique 'Viking Octantis' design that includes an enclosed in-ship marina (The Hangar) for launching zodiacs and submarines in comfort, shielded from the elements.</p>
+                </div>
+                <div class="bg-mist p-8 rounded-3xl border border-brandPrimary/5 shadow-md hover:shadow-lg transition-shadow">
+                    <h3 class="text-xl font-bold font-['Poppins'] uppercase mb-2 text-brandPrimary">Value Proposition</h3>
+                    <p class="text-slate text-sm leading-relaxed">Viking is nearly all-inclusive. Wi-Fi, beer and wine with lunch and dinner, specialty dining restaurants, and the thermal spa access are all included in the fare. There are very few opportunities to spend extra money on board.</p>
+                </div>
+            </div>
+        </div>
+      </section>
+
+      <section id="fleet-section" class="py-20 px-8 bg-sand">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-left mb-12">
+                <h2 class="text-4xl font-['Poppins'] font-semibold text-brandPrimary mb-2 tracking-tight">Global Fleet Inventory</h2>
+                <p class="text-slate text-xs tracking-widest font-bold uppercase opacity-60">Official Naval Classifications (Complete Registry).</p>
+            </div>
+            
+            <div class="bg-white rounded-[2rem] shadow-premium overflow-hidden border border-brandPrimary/5">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[1000px]">
+                        <thead>
+                            <tr class="bg-brandPrimary text-white uppercase text-[10px] tracking-[0.2em] font-bold">
+                                <th scope="col" class="p-5 px-8 flex items-center gap-4">
+                                    <span class="text-sm">Vessel Identity</span>
+                                    <span class="bg-white text-brandPrimary px-3 py-1 rounded-full text-[10px] tracking-widest font-black border border-white/20">Deck Plans</span>
+                                </th>
+                                <th scope="col" class="p-5 px-6">Class Designation</th>
+                                <th scope="col" class="p-5 px-6 text-center">Max Capacity</th>
+                                <th scope="col" class="p-5 px-6 text-right">Commissioned</th>
+                                <th scope="col" class="p-5 px-6 text-right">Deployment</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm font-medium font-['Poppins'] text-slate/80">
+                            <tr class="bg-mist/50 border-b border-sand">
+                                <td class="p-4 px-8 font-bold text-brandPrimary italic"><a href="https://www.cruisedeckplans.com/ships/Viking-Vesta" target="_blank" aria-label="View Deck Plans for Viking Vesta" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Viking Vesta</span></a></td>
+                                <td>Vela (Extended)</td><td class="text-center">998</td><td class="text-right font-bold text-brandPrimary">2025</td>
+                                <td class="p-3 px-6 text-right">
+                                    <a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Viking Vesta" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-slate-700 transition">VIEW SAILINGS</a>
+                                </td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Viking-Vela" target="_blank" aria-label="View Deck Plans for Viking Vela" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Viking Vela</span></a></td>
+                                <td>Vela (Extended)</td><td class="text-center">998</td><td class="text-right">2024</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Viking Vela" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-slate-700 transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Viking-Saturn" target="_blank" aria-label="View Deck Plans for Viking Saturn" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Viking Saturn</span></a></td>
+                                <td>Star</td><td class="text-center">930</td><td class="text-right">2023</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Viking Saturn" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-slate-700 transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Viking-Neptune" target="_blank" aria-label="View Deck Plans for Viking Neptune" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Viking Neptune</span></a></td>
+                                <td>Star (Hybrid)</td><td class="text-center">930</td><td class="text-right">2022</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Viking Neptune" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-slate-700 transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Viking-Mars" target="_blank" aria-label="View Deck Plans for Viking Mars" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Viking Mars</span></a></td>
+                                <td>Star</td><td class="text-center">930</td><td class="text-right">2022</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Viking Mars" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-slate-700 transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Viking-Venus" target="_blank" aria-label="View Deck Plans for Viking Venus" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Viking Venus</span></a></td>
+                                <td>Star</td><td class="text-center">930</td><td class="text-right">2021</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Viking Venus" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-slate-700 transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Viking-Jupiter" target="_blank" aria-label="View Deck Plans for Viking Jupiter" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Viking Jupiter</span></a></td>
+                                <td>Star</td><td class="text-center">930</td><td class="text-right">2019</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Viking Jupiter" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-slate-700 transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Viking-Orion" target="_blank" aria-label="View Deck Plans for Viking Orion" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Viking Orion</span></a></td>
+                                <td>Star</td><td class="text-center">930</td><td class="text-right">2018</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Viking Orion" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-slate-700 transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Viking-Sky" target="_blank" aria-label="View Deck Plans for Viking Sky" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Viking Sky</span></a></td>
+                                <td>Star</td><td class="text-center">930</td><td class="text-right">2017</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Viking Sky" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-slate-700 transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Viking-Sea" target="_blank" aria-label="View Deck Plans for Viking Sea" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Viking Sea</span></a></td>
+                                <td>Star</td><td class="text-center">930</td><td class="text-right">2016</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Viking Sea" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-slate-700 transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="group border-b border-sand hover:bg-mist transition-colors">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Viking-Star" target="_blank" aria-label="View Deck Plans for Viking Star" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Viking Star</span></a></td>
+                                <td>Star</td><td class="text-center">930</td><td class="text-right">2015</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Viking Star" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-slate-700 transition">VIEW SAILINGS</a></td>
+                            </tr>
+
+                            <tr class="bg-slate-50 border-b border-sand">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Viking-Polaris" target="_blank" aria-label="View Deck Plans for Viking Polaris" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Viking Polaris</span></a></td>
+                                <td>Polar Class 6</td><td class="text-center">378</td><td class="text-right">2022</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Viking Polaris" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-slate-700 transition">VIEW SAILINGS</a></td>
+                            </tr>
+                            <tr class="bg-slate-50 border-b border-sand">
+                                <td class="p-4 px-8 font-bold text-lg text-brandPrimary"><a href="https://www.cruisedeckplans.com/ships/Viking-Octantis" target="_blank" aria-label="View Deck Plans for Viking Octantis" class="flex items-center gap-3 hover:text-brandAccent transition-all"><span>Viking Octantis</span></a></td>
+                                <td>Polar Class 6</td><td class="text-center">378</td><td class="text-right">2022</td>
+                                <td class="p-3 px-6 text-right"><a href="#" target="_blank" rel="sponsored noopener" aria-label="View Sailings for Viking Octantis" class="bg-brandPrimary text-white px-5 py-2 rounded-lg text-[10px] font-bold uppercase hover:bg-slate-700 transition">VIEW SAILINGS</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      </section>
+
+      <section class="py-20 px-8 bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+            
+            <div>
+                <h2 class="text-4xl font-['Poppins'] font-semibold uppercase mb-8 text-brandPrimary leading-tight">Engineering <span class="text-slate/60 font-light">Profile</span></h2>
+                
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="font-bold text-xl text-brandPrimary mb-2 font-['Poppins']">Class Evolution: Star to Vela</h3>
+                        <p class="text-slate leading-relaxed text-sm">The original <strong>Star Class</strong> vessels (47,800 GT) were engineered for agility, specifically designed to fit into smaller ports like Venice, London (Greenwich), and Kotor that mega-ships cannot access. The new <strong>Vela Class</strong> has been lengthened by 10 meters, increasing gross tonnage to 54,300 to allow for larger fuel cells and hydrogen technology integration without reducing passenger space.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-xl text-brandPrimary mb-2 font-['Poppins']">The "Infinity" Cantilever</h3>
+                        <p class="text-slate leading-relaxed text-sm">A signature engineering feat of the Viking fleet is the aft Infinity Pool. This glass-backed pool is cantilevered off the stern of the ship, allowing guests to swim literally "over" the ocean. Structural reinforcement in the aft superstructure was heavily modified to support this weight while minimizing vibration from the azimuth thrusters below.</p>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-xl text-brandPrimary mb-2 font-['Poppins']">Polar Capability (Expedition)</h3>
+                        <p class="text-slate leading-relaxed text-sm">On the Polar Class ships (*Octantis/Polaris*), the "Aula" is a panoramic auditorium modeled after the University of Oslo's ceremonial hall. Engineering this required massive floor-to-ceiling glass panes capable of withstanding Arctic gales and ice impact, utilizing specialized heating elements to prevent fogging and ice buildup.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mt-8">
+                    <div class="bg-sand p-4 rounded-lg border-l-4 border-brandPrimary">
+                        <span class="block text-[10px] font-bold uppercase text-slate tracking-widest">Gross Tonnage</span>
+                        <span class="font-mono text-brandPrimary font-bold">47,842 / 54,300</span>
+                    </div>
+                    <div class="bg-sand p-4 rounded-lg border-l-4 border-brandPrimary">
+                        <span class="block text-[10px] font-bold uppercase text-slate tracking-widest">Ice Class</span>
+                        <span class="font-mono text-brandPrimary font-bold">Polar Class 6</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-brandPrimary text-white p-10 rounded-3xl shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-8 opacity-10">
+                    <svg width="200" height="200" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z"/></svg>
+                </div>
+                <h3 class="text-2xl font-bold font-['Poppins'] uppercase mb-6 tracking-widest text-brandAccent">Operational Data</h3>
+                <ul class="space-y-6 font-mono text-sm">
+                    <li class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-60">Service Speed</span>
+                        <span>20.0 Knots</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-60">Draft</span>
+                        <span>6.3m (Star) / 6.7m (Vela)</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-60">Propulsion</span>
+                        <span>Diesel-Electric + Hydrogen</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-60">Hull Length</span>
+                        <span>227m (Star) / 238m (Vela)</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-60">Beam (Width)</span>
+                        <span>28.8 Meters</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/20 pb-2">
+                        <span class="opacity-60">Stabilizers</span>
+                        <span>Rolls-Royce Aquarius</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+      </section>
+
+      <section id="deployment-cta" class="py-24 px-8 text-center bg-white border-t border-sand">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-['Poppins'] font-semibold mb-6 text-brandPrimary uppercase tracking-tight">Ready to Deploy?</h2>
+            
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 bg-sand p-6 rounded-[2.5rem] shadow-lg max-w-3xl mx-auto">
+                <label for="ship-select" class="sr-only">Select a Viking Ship</label>
+                <select id="ship-select" class="flex-1 w-full p-5 rounded-2xl font-bold text-brandPrimary bg-white border-2 border-transparent focus:border-brandPrimary focus:ring-2 focus:ring-brandPrimary/20 transition font-['Poppins'] outline-none">
+                    <option>Viking Vesta</option><option>Viking Vela</option><option>Viking Saturn</option><option>Viking Neptune</option><option>Viking Mars</option><option>Viking Venus</option><option>Viking Jupiter</option><option>Viking Orion</option><option>Viking Sky</option><option>Viking Sea</option><option>Viking Star</option><option>Viking Polaris</option><option>Viking Octantis</option>
+                </select>
+                <a href="#" target="_blank" rel="sponsored noopener" class="bg-brandPrimary text-white px-10 py-5 rounded-2xl font-bold uppercase tracking-widest hover:bg-slate-700 transition transform hover:scale-[1.02] shadow-xl w-full md:w-auto text-center text-xs">VIEW SAILINGS</a>
+            </div>
+        </div>
+      </section>
+
+  </main>
+
+  <footer class="bg-brandPrimary text-white py-12 text-center border-t border-white/10">
+    <div class="max-w-4xl mx-auto px-8">
+        <div class="text-4xl font-['Poppins'] mb-4 tracking-tight">
+            <span class="font-normal text-white/70">Cruise</span><span class="font-medium text-white">Prodigy</span>
+        </div>
+        <p class="text-[11px] text-white/80 mb-4 italic font-medium">Affiliate Disclosure: Some outbound links on this page may earn a commission at no cost to you.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
