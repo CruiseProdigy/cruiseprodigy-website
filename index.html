@@ -32,7 +32,12 @@
    <link rel="stylesheet" href="css/main.css">
 </head>
 <body class="bg-sand font-sans text-azure selection:bg-coral selection:text-white antialiased">
-
+<script>
+    // Password protection check
+    if (sessionStorage.getItem('authenticated') !== 'true') {
+        window.location.href = 'password-gate.html';
+    }
+</script>
   <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-azure text-white px-6 py-3 z-[200] rounded-lg font-bold shadow-2xl ring-4 ring-coral transition-all">Skip to Main Content</a>
 
   <nav class="hidden md:flex items-center justify-between pl-6 pr-16 py-4 bg-glass-premium w-full fixed top-0 z-[100] shadow-sm" aria-label="Main Navigation">
