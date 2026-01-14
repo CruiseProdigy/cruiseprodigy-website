@@ -1,0 +1,143 @@
+/* CruiseProdigy Main Stylesheet */
+/* Shared styles for all pages */
+
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+
+html { 
+    scroll-behavior: smooth; 
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.no-scrollbar::-webkit-scrollbar { 
+    display: none; 
+}
+
+.shadow-premium { 
+    box-shadow: 0 2px 4px rgba(0,59,92,0.02), 
+                0 10px 20px rgba(0,59,92,0.04), 
+                0 20px 40px rgba(0,59,92,0.04); 
+}
+
+.bg-glass-premium { 
+    background: rgba(255, 255, 255, 0.85); 
+    backdrop-filter: blur(20px) saturate(160%); 
+    border-bottom: 1px solid rgba(0,59,92,0.05); 
+}
+
+.sticky-ribbon { 
+    position: sticky; 
+    top: 0; 
+    z-index: 50; 
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+.card-3d { 
+    transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); 
+    transform-style: preserve-3d; 
+}
+
+.card-3d:hover { 
+    transform: translateY(-12px) scale(1.03); 
+}
+
+.pulse-red { 
+    animation: pulse 2s infinite; 
+}
+
+@keyframes pulse { 
+    0%, 100% { opacity: 1; } 
+    50% { opacity: .4; } 
+}
+
+.tab-content { 
+    transition: opacity 0.4s ease, transform 0.4s ease; 
+}
+
+.active-tab-grid { 
+    display: grid !important; 
+    animation: slideFadeIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); 
+}
+
+@keyframes slideFadeIn { 
+    from { opacity: 0; transform: translateY(15px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+/* Deck Button Pulse Animation - Plays once on page load */
+.deck-buttons-initial {
+    animation: gentlePulse 2s ease-in-out 1;
+}
+
+@keyframes gentlePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+/* ADA Compliance: High Visibility Focus Ring */
+*:focus-visible { 
+    outline: 3px solid #FF7043; 
+    outline-offset: 2px; 
+}
+
+/* ========================================
+   COMPONENT STYLES
+   ======================================== */
+
+/* Weather Art Background */
+.weather-art { 
+    position: absolute; 
+    top: 0; 
+    right: 0; 
+    width: 100%; 
+    height: 100%; 
+    opacity: 0.08; 
+    pointer-events: none; 
+    z-index: 0; 
+}
+
+/* Vibe Explorer Modal Styles */
+.modal-overlay {
+    background: rgba(0, 59, 92, 0.85);
+    backdrop-filter: blur(8px);
+    transition: opacity 0.3s ease;
+}
+
+.modal-content-anim {
+    animation: slideUp 0.4s ease forwards;
+}
+
+/* Deck Button Icons */
+.deck-icon {
+    font-size: 1.5rem;
+    display: inline-block;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Mobile Touch Targets */
+@media (max-width: 768px) {
+    .modal-option-btn { 
+        min-height: 48px; 
+    }
+}
