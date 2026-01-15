@@ -276,16 +276,7 @@ html {
         line-height: 1 !important;
     }
     
-    #forecast-container::after {
-        content: 'WIND\A12 MPH\A\AUV\A3';
-        white-space: pre !important;
-        text-align: center !important;
-        font-size: 0.5rem !important;
-        font-weight: 700 !important;
-        color: rgba(255, 255, 255, 0.8) !important;
-        line-height: 1.2 !important;
-        min-width: 50px !important;
-    }
+    
     
     /* ==========================================
        VIBE EXPLORER BUTTONS

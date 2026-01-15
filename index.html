@@ -101,6 +101,11 @@
                 <div class="text-center min-w-[60px]"><p id="f3-date" class="text-[10px] font-black opacity-60 uppercase tracking-widest mb-1">--</p><div id="f3-icon" class="text-xl" aria-hidden="true">⏳</div><p class="text-sm font-black mt-1"><span id="f3-high">--</span>°</p></div>
                 <div class="text-center min-w-[60px]"><p id="f4-date" class="text-[10px] font-black opacity-60 uppercase tracking-widest mb-1">--</p><div id="f4-icon" class="text-xl" aria-hidden="true">⏳</div><p class="text-sm font-black mt-1"><span id="f4-high">--</span>°</p></div>
                 <div class="text-center min-w-[60px]"><p id="f5-date" class="text-[10px] font-black opacity-60 uppercase tracking-widest mb-1">--</p><div id="f5-icon" class="text-xl" aria-hidden="true">⏳</div><p class="text-sm font-black mt-1"><span id="f5-high">--</span>°</p></div>
+                
+                <div class="text-center min-w-[100px] sm:hidden flex flex-col justify-center space-y-1">
+                    <p class="text-[11px] font-bold text-white/80 leading-tight">WIND <span id="wind-val-mobile" class="text-white">--</span></p>
+                    <p class="text-[11px] font-bold text-white/80 leading-tight">UV <span id="uv-val-mobile" class="text-white">--</span></p>
+                </div>
             </div>
             
             <div class="flex items-center space-x-4">
@@ -116,7 +121,6 @@
 
       <section id="vibe-explorer" class="py-20 px-10 bg-mist/30">
         <div class="max-w-7xl mx-auto">
-            <!-- Choose Your Path Section -->
             <div class="text-center mb-12">
                 <h2 class="text-4xl md:text-5xl font-black text-azure font-['Montserrat'] tracking-tighter mb-3 leading-none">Choose Your Path</h2>
                 <p class="text-base md:text-lg text-slate/70 font-medium max-w-2xl mx-auto">Start by destination, ship type, or traveler style — we'll guide you to the perfect match</p>
@@ -440,15 +444,13 @@
     </div>
   </footer>
 
-  <!-- VIBE EXPLORER MODAL -->
   <div id="followup-modal" class="modal-overlay hidden fixed inset-0 z-[9999] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <div id="modal-container" class="bg-white w-full max-w-2xl rounded-[2rem] p-8 md:p-12 shadow-2xl relative modal-content-anim">
           <h2 id="modal-title" class="text-3xl md:text-4xl font-black text-azure font-['Montserrat'] tracking-tighter mb-2 leading-none">Great choice!</h2>
           <p id="modal-subtitle" class="text-slate/70 font-medium mb-8">Want to narrow your search? Pick what matters most.</p>
           
           <div id="modal-options-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              <!-- Options populated by JavaScript -->
-          </div>
+              </div>
 
           <button id="modal-skip-btn" onclick="goToResults('all')" class="w-full py-5 rounded-2xl border-[4px] border-azure text-azure font-black text-sm uppercase tracking-[0.2em] hover:bg-azure hover:text-white transition-all focus:ring-4 focus:ring-coral">
               Skip - Show All <span id="skip-category-name"></span> Cruises
@@ -789,12 +791,26 @@
         try {
             const res = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=5`);
             const d = await res.json();
+            
+            // Safe helper to prevent crashes if elements are missing
+            const setText = (id, text) => {
+                const el = document.getElementById(id);
+                if (el) el.innerText = text;
+            };
+
             currentLocationName = d.location.name;
-            document.getElementById('hub-city').innerText = d.location.name.toUpperCase();
-            document.getElementById('temp-val').innerText = `${Math.round(d.current.temp_f)}°`;
-            document.getElementById('condition-text').innerText = d.current.condition.text.toUpperCase();
-            document.getElementById('wind-val').innerText = `${Math.round(d.current.wind_mph)} MPH`;
-            document.getElementById('uv-val').innerText = d.current.uv;
+            setText('hub-city', d.location.name.toUpperCase());
+            setText('temp-val', `${Math.round(d.current.temp_f)}°`);
+            setText('condition-text', d.current.condition.text.toUpperCase());
+            
+            // Update Desktop (if exists)
+            setText('wind-val', `${Math.round(d.current.wind_mph)} MPH`);
+            setText('uv-val', d.current.uv);
+
+            // Update Mobile (if exists)
+            setText('wind-val-mobile', `${Math.round(d.current.wind_mph)} MPH`);
+            setText('uv-val-mobile', d.current.uv);
+
             const days = d.forecast.forecastday;
             for(let i=0; i<5; i++) {
                 const day = days[i];
@@ -808,7 +824,7 @@
                     iconEl.innerText = c.includes('sun') || c.includes('clear') ? '☀️' : (c.includes('rain') ? '🌧️' : '☁️');
                 }
             }
-        } catch (err) { console.error(err); updateUI('Miami'); }
+        } catch (err) { console.error(err); /* Fallback disabled */ }
     }
     
     function fetchByPort() { const q = document.getElementById('port-search').value; if (q) updateUI(q); }

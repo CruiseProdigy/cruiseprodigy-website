@@ -1,0 +1,191 @@
+{
+  "ships": [
+    {
+      "id": "wonder-of-the-seas",
+      "name": "Wonder of the Seas",
+      "cruise_line": "Royal Caribbean",
+      "cruise_line_color": "royalBlue",
+      "cruise_line_page": "/pages/cruise-lines/line-royal.html",
+      
+      "destinations": ["caribbean", "mediterranean"],
+      "vibes": ["family-fun", "mega-ship", "water-parks", "adventure"],
+      "traveler_types": ["families", "multi-generational", "tweens-teens"],
+      
+      "itinerary": "7-Night Eastern Caribbean",
+      "duration_days": 7,
+      "ports": ["Cozumel", "Roatán", "Perfect Day CocoCay"],
+      "departure_ports": ["Miami", "Port Canaveral"],
+      
+      "rating": 4.8,
+      "review_count": 2847,
+      "price_from": 899,
+      "price_currency": "USD",
+      "budget_category": "mid-range",
+      
+      "capacity": 6988,
+      "year_built": 2022,
+      "tonnage": 236857,
+      
+      "kids_club_ages": "3-17",
+      "kids_club_name": "Adventure Ocean",
+      "has_waterpark": true,
+      "has_teen_area": true,
+      "has_nursery": false,
+      
+      "features": [
+        "Ultimate Abyss slide (kids 10+)",
+        "Aquanauts kids club (3-12 years)",
+        "FlowRider surf simulator",
+        "Separate teen lounge (The Hangout)",
+        "Complimentary kids program all day"
+      ],
+      
+      "why_perfect": [
+        "Ultimate Abyss slide (kids 10+)",
+        "Aquanauts kids club (3-12 years)",
+        "FlowRider surf simulator",
+        "Separate teen lounge (The Hangout)",
+        "Complimentary kids program all day"
+      ],
+      
+      "hero_image": "/images/ships/wonder-of-the-seas.jpg",
+      "hero_image_alt": "Wonder of the Seas cruise ship at sea",
+      
+      "affiliate_link": "https://cruisedirect.com/cruise-line/royal-caribbean?ship=wonder-of-the-seas&tracking=CRUISEPRODIGY",
+      "detail_page": "/pages/ships/wonder-of-the-seas.html",
+      
+      "deck_plan_url": "https://www.cruisedeckplans.com/deckplans/Royal-Caribbean/Wonder-of-the-Seas",
+      
+      "badge": "🏆 #1 Best for Families with Young Kids",
+      "badge_color": "coral"
+    },
+    
+    {
+      "id": "oasis-of-the-seas",
+      "name": "Oasis of the Seas",
+      "cruise_line": "Royal Caribbean",
+      "cruise_line_color": "royalBlue",
+      "cruise_line_page": "/pages/cruise-lines/line-royal.html",
+      
+      "destinations": ["caribbean"],
+      "vibes": ["family-fun", "mega-ship", "multi-age", "water-parks"],
+      "traveler_types": ["families", "multi-generational", "all-ages"],
+      
+      "itinerary": "7-Night Western Caribbean",
+      "duration_days": 7,
+      "ports": ["Cozumel", "Costa Maya", "Roatán"],
+      "departure_ports": ["Miami", "Fort Lauderdale"],
+      
+      "rating": 4.7,
+      "review_count": 3102,
+      "price_from": 849,
+      "price_currency": "USD",
+      "budget_category": "mid-range",
+      
+      "capacity": 6780,
+      "year_built": 2009,
+      "tonnage": 225282,
+      
+      "kids_club_ages": "3-17",
+      "kids_club_name": "Adventure Ocean",
+      "has_waterpark": true,
+      "has_teen_area": true,
+      "has_nursery": false,
+      
+      "features": [
+        "AquaTheater water shows",
+        "Adventure Ocean (3-17 years)",
+        "Zip line 9 decks high",
+        "Multiple water slides for all ages",
+        "Living Room teen club"
+      ],
+      
+      "why_perfect": [
+        "AquaTheater water shows",
+        "Adventure Ocean (3-17 years)",
+        "Zip line 9 decks high",
+        "Multiple water slides for all ages",
+        "Living Room teen club"
+      ],
+      
+      "hero_image": "/images/ships/oasis-of-the-seas.jpg",
+      "hero_image_alt": "Oasis of the Seas cruise ship",
+      
+      "affiliate_link": "https://cruisedirect.com/cruise-line/royal-caribbean?ship=oasis-of-the-seas&tracking=CRUISEPRODIGY",
+      "detail_page": "/pages/ships/oasis-of-the-seas.html",
+      
+      "deck_plan_url": "https://www.cruisedeckplans.com/deckplans/Royal-Caribbean/Oasis-of-the-Seas",
+      
+      "badge": "🥈 #2 Best for Multi-Age Families",
+      "badge_color": "lagoon"
+    },
+    
+    {
+      "id": "carnival-mardi-gras",
+      "name": "Mardi Gras",
+      "cruise_line": "Carnival",
+      "cruise_line_color": "carnivalRed",
+      "cruise_line_page": "/pages/cruise-lines/line-carnival.html",
+      
+      "destinations": ["caribbean"],
+      "vibes": ["family-fun", "budget-friendly", "water-parks", "adventure"],
+      "traveler_types": ["families", "budget-conscious", "young-kids"],
+      
+      "itinerary": "7-Night Eastern Caribbean",
+      "duration_days": 7,
+      "ports": ["San Juan", "Amber Cove", "Grand Turk"],
+      "departure_ports": ["Port Canaveral"],
+      
+      "rating": 4.6,
+      "review_count": 1988,
+      "price_from": 699,
+      "price_currency": "USD",
+      "budget_category": "value",
+      
+      "capacity": 6465,
+      "year_built": 2021,
+      "tonnage": 180800,
+      
+      "kids_club_ages": "2-17",
+      "kids_club_name": "Camp Ocean",
+      "has_waterpark": true,
+      "has_teen_area": true,
+      "has_nursery": true,
+      
+      "features": [
+        "BOLT roller coaster at sea",
+        "Camp Ocean (2-11 years)",
+        "WaterWorks aqua park",
+        "Circle C tweens/teen club",
+        "Best value per night"
+      ],
+      
+      "why_perfect": [
+        "BOLT roller coaster at sea",
+        "Camp Ocean (2-11 years)",
+        "WaterWorks aqua park",
+        "Circle C tweens/teen club",
+        "Best value per night"
+      ],
+      
+      "hero_image": "/images/ships/carnival-mardi-gras.jpg",
+      "hero_image_alt": "Carnival Mardi Gras cruise ship",
+      
+      "affiliate_link": "https://cruisedirect.com/cruise-line/carnival?ship=mardi-gras&tracking=CRUISEPRODIGY",
+      "detail_page": "/pages/ships/carnival-mardi-gras.html",
+      
+      "deck_plan_url": "https://www.cruisedeckplans.com/deckplans/Carnival/Mardi-Gras",
+      
+      "badge": "🥉 #3 Best Value for Families",
+      "badge_color": "azure"
+    }
+  ],
+  
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2026-01-15",
+    "total_ships": 3,
+    "cruise_lines": ["Royal Caribbean", "Carnival"],
+    "destinations_covered": ["caribbean", "mediterranean"]
+  }
+}
