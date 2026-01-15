@@ -71,9 +71,9 @@
 
       <section id="weather-ribbon" class="sticky-ribbon py-1 px-10 bg-azure text-white shadow-2xl mt-[-1px]">
         <div id="weather-art-bg" class="weather-art" aria-hidden="true"></div>
-        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 lg:gap-8 relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10">
             
-            <button onclick="openWeatherDeepLink()" class="flex items-center space-x-4 lg:space-x-8 cursor-pointer p-2 rounded-2xl hover:bg-white/5 transition-all group w-full lg:w-auto text-left focus:outline-none focus:ring-2 focus:ring-coral" aria-label="Open detailed weather report">
+            <button onclick="openWeatherDeepLink()" class="flex items-center space-x-8 cursor-pointer p-2 rounded-2xl hover:bg-white/5 transition-all group w-full lg:w-auto text-left focus:outline-none focus:ring-2 focus:ring-coral" aria-label="Open detailed weather report">
                 <div class="flex items-start space-x-3">
                     <div class="pt-1.5">
                         <div class="w-2 h-2 bg-coral rounded-full pulse-red"></div>
@@ -83,9 +83,8 @@
                         <h2 id="hub-city" class="text-2xl font-bold font-['Montserrat'] tracking-tighter leading-none uppercase text-left">Locating...</h2>
                     </div>
                 </div>
-                <div class="flex items-center space-x-4 lg:space-x-6 border-l border-white/10 pl-4 lg:pl-8">
+                <div class="flex items-center space-x-6 border-l border-white/10 pl-8">
                     <span id="temp-val" class="text-4xl font-bold font-['Montserrat']">--°</span>
-                    
                     <div class="hidden sm:block">
                         <p id="condition-text" class="text-[10px] font-black uppercase tracking-widest text-mist">Syncing Data...</p>
                         <div class="flex space-x-4 mt-1">
@@ -93,20 +92,19 @@
                             <p class="text-[10px] font-bold text-white/70 italic">UV: <span id="uv-val" class="text-white not-italic">--</span></p>
                         </div>
                     </div>
-
-                    <div class="sm:hidden flex flex-col justify-center space-y-0.5 ml-2">
-                         <p class="text-[10px] font-bold text-white/90 leading-tight whitespace-nowrap">WIND <span id="wind-val-mobile" class="text-white">--</span></p>
-                         <p class="text-[10px] font-bold text-white/90 leading-tight whitespace-nowrap">UV <span id="uv-val-mobile" class="text-white">--</span></p>
-                    </div>
                 </div>
             </button>
 
-            <div id="forecast-container" class="flex items-center space-x-5 lg:space-x-8 overflow-x-auto no-scrollbar border-l border-white/10 pl-8 w-full lg:w-auto py-2" aria-label="5 Day Forecast">
-                <div class="text-center min-w-[60px]"><p id="f1-date" class="text-[10px] font-black opacity-60 uppercase tracking-widest mb-1">--</p><div id="f1-icon" class="text-xl" aria-hidden="true">⏳</div><p class="text-sm font-black mt-1"><span id="f1-high">--</span>°</p></div>
+<div id="forecast-container" class="flex items-center space-x-5 lg:space-x-8 overflow-x-auto no-scrollbar border-l border-white/10 pl-8 w-full lg:w-auto py-2" aria-label="5 Day Forecast">                <div class="text-center min-w-[60px]"><p id="f1-date" class="text-[10px] font-black opacity-60 uppercase tracking-widest mb-1">--</p><div id="f1-icon" class="text-xl" aria-hidden="true">⏳</div><p class="text-sm font-black mt-1"><span id="f1-high">--</span>°</p></div>
                 <div class="text-center min-w-[60px]"><p id="f2-date" class="text-[10px] font-black opacity-60 uppercase tracking-widest mb-1">--</p><div id="f2-icon" class="text-xl" aria-hidden="true">⏳</div><p class="text-sm font-black mt-1"><span id="f2-high">--</span>°</p></div>
                 <div class="text-center min-w-[60px]"><p id="f3-date" class="text-[10px] font-black opacity-60 uppercase tracking-widest mb-1">--</p><div id="f3-icon" class="text-xl" aria-hidden="true">⏳</div><p class="text-sm font-black mt-1"><span id="f3-high">--</span>°</p></div>
                 <div class="text-center min-w-[60px]"><p id="f4-date" class="text-[10px] font-black opacity-60 uppercase tracking-widest mb-1">--</p><div id="f4-icon" class="text-xl" aria-hidden="true">⏳</div><p class="text-sm font-black mt-1"><span id="f4-high">--</span>°</p></div>
                 <div class="text-center min-w-[60px]"><p id="f5-date" class="text-[10px] font-black opacity-60 uppercase tracking-widest mb-1">--</p><div id="f5-icon" class="text-xl" aria-hidden="true">⏳</div><p class="text-sm font-black mt-1"><span id="f5-high">--</span>°</p></div>
+                
+                <div class="text-center min-w-[100px] sm:hidden flex flex-col justify-center space-y-1">
+                    <p class="text-[11px] font-bold text-white/80 leading-tight">WIND <span id="wind-val-mobile" class="text-white">--</span></p>
+                    <p class="text-[11px] font-bold text-white/80 leading-tight">UV <span id="uv-val-mobile" class="text-white">--</span></p>
+                </div>
             </div>
             
             <div class="flex items-center space-x-4">
